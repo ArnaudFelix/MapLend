@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapLend.Business", "Map.Bus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapLend.DAL", "Map.DAL\MapLend.DAL.csproj", "{91AAC0EF-8A85-4D57-B46C-6FE04CEF905E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapLend.Mvc", "MapLend.Mvc\MapLend.Mvc.csproj", "{2FCAA1AC-10FB-4A79-9746-04A5E172A14E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapLend.Mvc", "MapLend.Mvc\MapLend.Mvc.csproj", "{09625FD8-8310-4CBD-9C27-56D09DAD7168}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{91AAC0EF-8A85-4D57-B46C-6FE04CEF905E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91AAC0EF-8A85-4D57-B46C-6FE04CEF905E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91AAC0EF-8A85-4D57-B46C-6FE04CEF905E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2FCAA1AC-10FB-4A79-9746-04A5E172A14E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FCAA1AC-10FB-4A79-9746-04A5E172A14E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FCAA1AC-10FB-4A79-9746-04A5E172A14E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FCAA1AC-10FB-4A79-9746-04A5E172A14E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09625FD8-8310-4CBD-9C27-56D09DAD7168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09625FD8-8310-4CBD-9C27-56D09DAD7168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09625FD8-8310-4CBD-9C27-56D09DAD7168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09625FD8-8310-4CBD-9C27-56D09DAD7168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
