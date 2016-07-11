@@ -11,7 +11,7 @@ namespace Map.Business
         {
             get
             {
-                throw new System.NotImplementedException();
+                return null;
             }
 
             set
