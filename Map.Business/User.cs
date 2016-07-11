@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace Map.Business
+namespace MapLend.Business
 {
     public class User
     {
