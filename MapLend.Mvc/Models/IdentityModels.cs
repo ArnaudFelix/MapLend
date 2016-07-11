@@ -21,7 +21,7 @@ namespace MapLend.Mvc.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MapDb", throwIfV1Schema: false)
         {
         }
 
