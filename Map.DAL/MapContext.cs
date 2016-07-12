@@ -14,13 +14,6 @@ namespace MapLend.DAL
         {
         }
 
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Map> Maps { get; set; }
-        public DbSet<Tool> Tools { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Lend> Lends { get; set; }
-        public DbSet<LendStatus> LendStatuses { get; set; }
-        public DbSet<ToolStatus> ToolStatuses { get; set; }
+
     }
 }

@@ -181,6 +181,14 @@
     <Compile Include="Migrations\201607120745255_users.Designer.cs">
       <DependentUpon>201607120745255_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607120837051_prenom.cs" />
+    <Compile Include="Migrations\201607120837051_prenom.Designer.cs">
+      <DependentUpon>201607120837051_prenom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607120840208_dal supprimée.cs" />
+    <Compile Include="Migrations\201607120840208_dal supprimée.Designer.cs">
+      <DependentUpon>201607120840208_dal supprimée.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -189,6 +197,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MapLend.mdf" />
+    <Content Include="App_Data\MapLend_log.ldf">
+      <DependentUpon>MapLend.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -244,9 +256,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -260,10 +270,6 @@
       <Project>{d04d9487-bac3-4baa-a7b9-196d6ca6d247}</Project>
       <Name>MapLend.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Map.DAL\MapLend.DAL.csproj">
-      <Project>{91aac0ef-8a85-4d57-b46c-6fe04cef905e}</Project>
-      <Name>MapLend.DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607120740134_initial.resx">
@@ -271,6 +277,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607120745255_users.resx">
       <DependentUpon>201607120745255_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120837051_prenom.resx">
+      <DependentUpon>201607120837051_prenom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120840208_dal supprimée.resx">
+      <DependentUpon>201607120840208_dal supprimée.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

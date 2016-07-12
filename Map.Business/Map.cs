@@ -7,52 +7,12 @@ namespace MapLend.Business
 {
     public class Map
     {
-        public ICollection<User> Users
-        {
-            get
-            {
-                return null;
-            }
+        public ICollection<User> Users { get; set; }
 
-            set
-            {
-            }
-        }
+        public int Id { get; set; }
 
-        public int Id
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public string Name { get; set; }
 
-            set
-            {
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public Address Address
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public Address Address { get; set; }
     }
 }

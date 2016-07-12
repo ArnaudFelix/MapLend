@@ -8,100 +8,24 @@ namespace MapLend.Business
 {
     public class User
     {
-        public ICollection<Tool> Tools
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public ICollection<Tool> Tools { get; set; }
 
-            set
-            {
-            }
-        }
+        public ICollection<Map> Maps { get; set; }
 
-        public ICollection<Map> Maps
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public int Id { get; set; }
 
-            set
-            {
-            }
-        }
+        public ICollection<Lend> BorrowedTools { get; set; }
 
-        public int Id
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public string Firstname { get; set; }
 
-            set
-            {
-            }
-        }
+        public string Surname { get; set; }
 
-        public ICollection<Lend> BorrowedTools
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public string Username { get; set; }
 
-            set
-            {
-            }
-        }
+        public Address Address { get; set; }
 
-        public string Surname
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public int Rating { get; set; }
 
-            set
-            {
-            }
-        }
-
-        public Address Address
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public int Rating
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public ICollection<Lend> LendedTools
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public ICollection<Lend> LendedTools { get; set; }
     }
 }
