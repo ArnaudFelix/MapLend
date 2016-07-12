@@ -51,11 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MapContext.cs" />
-    <Compile Include="Migrations\201607111451498_initial.cs" />
-    <Compile Include="Migrations\201607111451498_initial.Designer.cs">
-      <DependentUpon>201607111451498_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,11 +62,6 @@
       <Project>{d04d9487-bac3-4baa-a7b9-196d6ca6d247}</Project>
       <Name>MapLend.Business</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607111451498_initial.resx">
-      <DependentUpon>201607111451498_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
