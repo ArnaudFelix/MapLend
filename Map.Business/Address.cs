@@ -11,67 +11,14 @@ namespace MapLend.Business
     {
         public int Id { get; set; }
 
-        public string ZipCode
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public string ZipCode { get; set; }
 
-            set
-            {
-            }
-        }
+        public string City { get; set; }
 
-        public string City
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public string AddressLine1 { get; set; }
 
-            set
-            {
-            }
-        }
+        public string AddressLine2 { get; set; }
 
-        public string AddressLine1
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public string AddressLine2
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        /// <summary>
-        /// ??? utilité ????
-        /// </summary>
-        public string Country
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public string Country { get; set; }
     }
 }

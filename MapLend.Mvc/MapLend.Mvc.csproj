@@ -189,6 +189,14 @@
     <Compile Include="Migrations\201607120840208_dal supprimée.Designer.cs">
       <DependentUpon>201607120840208_dal supprimée.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607120902542_remove user.cs" />
+    <Compile Include="Migrations\201607120902542_remove user.Designer.cs">
+      <DependentUpon>201607120902542_remove user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607120959415_new.cs" />
+    <Compile Include="Migrations\201607120959415_new.Designer.cs">
+      <DependentUpon>201607120959415_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -197,10 +205,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\MapLend.mdf" />
-    <Content Include="App_Data\MapLend_log.ldf">
-      <DependentUpon>MapLend.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -256,7 +260,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -283,6 +289,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607120840208_dal supprimée.resx">
       <DependentUpon>201607120840208_dal supprimée.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120902542_remove user.resx">
+      <DependentUpon>201607120902542_remove user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120959415_new.resx">
+      <DependentUpon>201607120959415_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

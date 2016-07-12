@@ -7,64 +7,14 @@ namespace MapLend.Business
 {
     public class Tool
     {
-        public Category Category
-        {
-            get
-            {
-                return null;
-            }
+        public Category Category { get; set; }
 
-            set
-            {
-            }
-        }
+        public User User { get; set; }
 
-        public User User
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public string Name { get; set; }
 
-            set
-            {
-            }
-        }
+        public int Id { get; set; }
 
-        public string Name
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public ToolStatus ToolStatus
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public ToolStatus ToolStatus { get; set; }
     }
 }

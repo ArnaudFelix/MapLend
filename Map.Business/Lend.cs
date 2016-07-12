@@ -7,88 +7,18 @@ namespace MapLend.Business
 {
     public class Lend
     {
-        public int Id
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public int Id { get; set; }
 
-            set
-            {
-            }
-        }
+        public User Lender { get; set; }
 
-        public User Lender
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public User Borrower { get; set; }
 
-            set
-            {
-            }
-        }
+        public Tool Tool { get; set; }
 
-        public User Borrower
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public DateTime BeginDate { get; set; }
 
-            set
-            {
-            }
-        }
+        public DateTime EndDate { get; set; }
 
-        public Tool Tool
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public DateTime BeginDate
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public DateTime EndDate
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public LendStatus LendStatus
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public LendStatus LendStatus { get; set; }
     }
 }

@@ -7,28 +7,8 @@ namespace MapLend.Business
 {
     public class Category
     {
-        public int Id
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public int Id { get; set; }
 
-            set
-            {
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public string Name { get; set; }
     }
 }
