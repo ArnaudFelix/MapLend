@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using MapLend.Business;
@@ -8,7 +9,6 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace MapLend.Mvc.Infrastructure
 {
-    [Authorize]
     public abstract class MapControllerBase : Controller
     {
         protected User CurrentUser { get; private set; }
@@ -24,7 +24,7 @@ namespace MapLend.Mvc.Infrastructure
 
             var user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
 
-            if (CurrentUser == null )
+            if (CurrentUser == null)
             {
                 string username = User.Identity.Name;
                 CurrentUser = DbCtx.MapUsers.Single(u => u.Username == username);
@@ -35,12 +35,10 @@ namespace MapLend.Mvc.Infrastructure
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && DbCtx != null)
             {
-                if (DbCtx != null)
-                {
-                    DbCtx.Dispose();
-                }
+                DbCtx.Dispose();
+                DbCtx = null;
             }
 
             base.Dispose(disposing);

@@ -176,29 +176,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\MapControllerBase.cs" />
-    <Compile Include="Migrations\201607120740134_initial.cs" />
-    <Compile Include="Migrations\201607120740134_initial.Designer.cs">
-      <DependentUpon>201607120740134_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607120745255_users.cs" />
-    <Compile Include="Migrations\201607120745255_users.Designer.cs">
-      <DependentUpon>201607120745255_users.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607120837051_prenom.cs" />
-    <Compile Include="Migrations\201607120837051_prenom.Designer.cs">
-      <DependentUpon>201607120837051_prenom.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607120840208_dal supprimée.cs" />
-    <Compile Include="Migrations\201607120840208_dal supprimée.Designer.cs">
-      <DependentUpon>201607120840208_dal supprimée.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607120902542_remove user.cs" />
-    <Compile Include="Migrations\201607120902542_remove user.Designer.cs">
-      <DependentUpon>201607120902542_remove user.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607120959415_new.cs" />
-    <Compile Include="Migrations\201607120959415_new.Designer.cs">
-      <DependentUpon>201607120959415_new.cs</DependentUpon>
+    <Compile Include="Migrations\201607121355464_initial.cs" />
+    <Compile Include="Migrations\201607121355464_initial.Designer.cs">
+      <DependentUpon>201607121355464_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -282,23 +262,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607120740134_initial.resx">
-      <DependentUpon>201607120740134_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607120745255_users.resx">
-      <DependentUpon>201607120745255_users.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607120837051_prenom.resx">
-      <DependentUpon>201607120837051_prenom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607120840208_dal supprimée.resx">
-      <DependentUpon>201607120840208_dal supprimée.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607120902542_remove user.resx">
-      <DependentUpon>201607120902542_remove user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607120959415_new.resx">
-      <DependentUpon>201607120959415_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607121355464_initial.resx">
+      <DependentUpon>201607121355464_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
