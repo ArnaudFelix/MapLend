@@ -28,6 +28,6 @@ namespace MapLend.Business
 
         public ICollection<Lend> LendedTools { get; set; }
 
-        public UserPhoto Photo { get; set; }
+        public virtual UserPhoto Photo { get; set; }
     }
 }

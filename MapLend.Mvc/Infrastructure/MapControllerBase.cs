@@ -27,7 +27,7 @@ namespace MapLend.Mvc.Infrastructure
             if (CurrentUser == null)
             {
                 string username = User.Identity.Name;
-                CurrentUser = DbCtx.MapUsers.Include(u => u.Photo).Single(u => u.Username == username);
+                CurrentUser = DbCtx.MapUsers.Single(u => u.Username == username);
             }
 
             base.OnActionExecuting(filterContext);

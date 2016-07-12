@@ -1,21 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Map.Business.User">
+  <Class Name="MapLend.Business.User">
     <Position X="5.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAABCAAAAAEAAAAAAAABAAAAAECQAAAAACABAA=</HashCode>
+      <HashCode>AAACAEAABAAAACAAAQAAAAAABAAAAAECQAAAAACABAA=</HashCode>
       <FileName>User.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Address" />
+      <Property Name="Photo" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Maps" />
       <Property Name="BorrowedTools" />
       <Property Name="LendedTools" />
+      <Property Name="Tools" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Map.Business.Tool">
+  <Class Name="MapLend.Business.Tool">
     <Position X="3.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAADAAAAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAAAACAA=</HashCode>
@@ -27,14 +29,14 @@
       <Property Name="ToolStatus" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Map.Business.Category">
+  <Class Name="MapLend.Business.Category">
     <Position X="3.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Category.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Map.Business.Map">
+  <Class Name="MapLend.Business.Map">
     <Position X="8.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACACAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
@@ -47,14 +49,14 @@
       <Property Name="Users" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Map.Business.Address">
+  <Class Name="MapLend.Business.Address">
     <Position X="6" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAIAAAAAAAAAAIAAAABAAAAAAAQAAA=</HashCode>
       <FileName>Address.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Map.Business.Lend">
+  <Class Name="MapLend.Business.Lend">
     <Position X="0.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAiAAAAAAAIAAAAAAEAgAAAAAAAAAAAAAAQAAAA=</HashCode>
@@ -67,18 +69,25 @@
       <Property Name="LendStatus" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Map.Business.LendStatus">
+  <Class Name="MapLend.Business.LendStatus">
     <Position X="0.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>LendStatus.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Map.Business.ToolStatus">
+  <Class Name="MapLend.Business.ToolStatus">
     <Position X="0.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ToolStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapLend.Business.UserPhoto">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserPhoto.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
