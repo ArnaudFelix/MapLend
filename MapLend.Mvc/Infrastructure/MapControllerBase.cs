@@ -8,8 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace MapLend.Mvc.Infrastructure
 {
-    [Authorize]
-    public class MapControllerBase : Controller
+    public abstract class MapControllerBase : Controller
     {
         protected User CurrentUser { get; private set; }
         protected ApplicationDbContext DbCtx { get; private set; }
