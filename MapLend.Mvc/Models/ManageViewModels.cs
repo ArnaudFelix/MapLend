@@ -8,10 +8,9 @@ namespace MapLend.Mvc.Models
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
-        public IList<UserLoginInfo> Logins { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool TwoFactor { get; set; }
-        public bool BrowserRemembered { get; set; }
+        public string Surname { get; set; }
+        public string Firstname { get; set; }
+        public bool HasPhoto { get; set; }
     }
 
     public class ManageLoginsViewModel

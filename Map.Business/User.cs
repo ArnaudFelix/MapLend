@@ -27,5 +27,7 @@ namespace MapLend.Business
         public int Rating { get; set; }
 
         public ICollection<Lend> LendedTools { get; set; }
+
+        public UserPhoto Photo { get; set; }
     }
 }

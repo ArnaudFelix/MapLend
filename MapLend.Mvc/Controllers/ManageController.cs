@@ -7,11 +7,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MapLend.Mvc.Models;
+using MapLend.Mvc.Infrastructure;
+using System.IO;
 
 namespace MapLend.Mvc.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : MapControllerBase
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -32,9 +34,9 @@ namespace MapLend.Mvc.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -67,12 +69,40 @@ namespace MapLend.Mvc.Controllers
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                Firstname = this.CurrentUser.Firstname,
+                Surname = this.CurrentUser.Surname,
+                HasPhoto = false
             };
+
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(IndexViewModel indexVm, HttpPostedFileBase photo)
+        {
+            CurrentUser.Firstname = indexVm.Firstname;
+            CurrentUser.Surname = indexVm.Surname;
+
+            if (photo != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    photo.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                    CurrentUser.Photo = new Business.UserPhoto { Image = array };
+                }
+            }
+
+            DbCtx.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public FileContentResult Photo()
+        {
+            byte[] img = CurrentUser.Photo == null  ? null : CurrentUser.Photo.Image;
+
+            return File(img, "image/jpg");
         }
 
         //
@@ -90,12 +120,14 @@ namespace MapLend.Mvc.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
+
                 message = ManageMessageId.RemoveLoginSuccess;
             }
             else
             {
                 message = ManageMessageId.Error;
             }
+
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 

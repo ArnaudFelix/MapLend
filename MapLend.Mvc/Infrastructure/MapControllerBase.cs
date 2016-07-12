@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using MapLend.Business;
@@ -23,10 +24,10 @@ namespace MapLend.Mvc.Infrastructure
 
             var user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
 
-            if (CurrentUser == null )
+            if (CurrentUser == null)
             {
                 string username = User.Identity.Name;
-                CurrentUser = DbCtx.MapUsers.Single(u => u.Username == username);
+                CurrentUser = DbCtx.MapUsers.Include(u => u.Photo).Single(u => u.Username == username);
             }
 
             base.OnActionExecuting(filterContext);
@@ -34,12 +35,10 @@ namespace MapLend.Mvc.Infrastructure
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && DbCtx != null)
             {
-                if (DbCtx != null)
-                {
-                    DbCtx.Dispose();
-                }
+                DbCtx.Dispose();
+                DbCtx = null;
             }
 
             base.Dispose(disposing);

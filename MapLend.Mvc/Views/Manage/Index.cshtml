@@ -9,79 +9,33 @@
 <div>
     <h4>Changer les paramètres de votre compte</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>Mot de passe :</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Changer votre mot de passe", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Créer", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>Connexions externes :</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Gérer", "ManageLogins") ]
-        </dd>
-        @*
-            Les numéros de téléphone peuvent servir de second facteur de vérification dans un système d'authentification à 2 facteurs.
-             
-             Consultez <a href="http://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
-                pour des détails sur la configuration de cette application ASP.NET en vue de la prise en charge de l'authentification à 2 facteurs via des SMS.
-             
-             Décommentez le bloc suivant après avoir configuré l'authentification à 2 facteurs
-        *@
-        @*  
-            <dt>Numéro de téléphone :</dt>
+    @using (@Html.BeginForm("Index", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+        <dl class="dl-horizontal">
+            <dt>Mot de passe :</dt>
             <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
+                [
+                @if (Model.HasPassword)
                 {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
+                    @Html.ActionLink("Changer votre mot de passe", "ChangePassword")
                 }
                 else
                 {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                    @Html.ActionLink("Créer", "SetPassword")
                 }
+                ]
             </dd>
-        *@
-        <dt>Authentification à 2 facteurs :</dt>
-        <dd>
-            <p>
-                Il n'existe aucun fournisseur d'authentification à 2 facteurs configuré. Consultez <a href="http://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
-                pour des détails sur la configuration de cette application ASP.NET en vue de la prise en charge de l'authentification à 2 facteurs.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Activé
-                        <input type="submit" value="Désactiver" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Désactivé
-                        <input type="submit" value="Activer" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
-    </dl>
+            <dt>Prénom :</dt>
+            <dd>@Html.EditorFor(m => m.Firstname)</dd>
+            <dt>Nom :</dt>
+            <dd>@Html.EditorFor(m => m.Surname)</dd>
+            <dt>Photo :</dt>
+            <dd>
+                <img src="../Manage/Photo" />
+                <input type="file" name="photo" />
+            </dd>
+        </dl>
+        <input type="submit" value="Valide" />
+    }
 </div>
