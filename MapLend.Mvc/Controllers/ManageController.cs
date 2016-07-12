@@ -90,7 +90,13 @@ namespace MapLend.Mvc.Controllers
                 {
                     photo.InputStream.CopyTo(ms);
                     byte[] array = ms.GetBuffer();
-                    CurrentUser.Photo = new Business.UserPhoto { Image = array };
+                    if (CurrentUser.Photo == null)
+                    {
+                        CurrentUser.Photo = new Business.UserPhoto { Image = array };
+                    } else
+                    {
+                        CurrentUser.Photo.Image = array;
+                    }
                 }
             }
 
