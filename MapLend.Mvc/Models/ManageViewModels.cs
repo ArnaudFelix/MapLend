@@ -8,9 +8,35 @@ namespace MapLend.Mvc.Models
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
-        public string Surname { get; set; }
-        public string Firstname { get; set; }
         public bool HasPhoto { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Courrier électronique")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Prénom")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Nom")]
+        public string SurName { get; set; }
+
+        [Required]
+        [Display(Name = "Adresse (ligne 1)")]
+        public string Address1 { get; set; }
+
+        [Display(Name = "Adresse (ligne 2)")]
+        public string Address2 { get; set; }
+
+        [Required, MaxLength(10)]
+        [Display(Name = "Code postal")]
+        public string ZipCode { get; set; }
+
+        [Required]
+        [Display(Name = "Ville")]
+        public string City { get; set; }
     }
 
     public class ManageLoginsViewModel

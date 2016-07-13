@@ -16,6 +16,7 @@ namespace MapLend.Mvc.Models
         {
             // Notez qu'authenticationType doit correspondre à l'élément défini dans CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+
             // Ajouter les revendications personnalisées de l’utilisateur ici
             return userIdentity;
         }
@@ -26,6 +27,9 @@ namespace MapLend.Mvc.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+#if DEBUG
+            this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+#endif
         }
 
         public DbSet<Address> Addresses { get; set; }
@@ -39,5 +43,7 @@ namespace MapLend.Mvc.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MapLend.Mvc.Models.ToolViewModel> ToolViewModels { get; set; }
     }
 }

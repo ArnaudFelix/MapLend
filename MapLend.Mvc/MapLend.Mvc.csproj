@@ -172,9 +172,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\EnumGetName.cs" />
     <Compile Include="Infrastructure\MapControllerBase.cs" />
     <Compile Include="Migrations\201607121355464_initial.cs" />
     <Compile Include="Migrations\201607121355464_initial.Designer.cs">
@@ -184,10 +186,24 @@
     <Compile Include="Migrations\201607130735516_correction modèle.Designer.cs">
       <DependentUpon>201607130735516_correction modèle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607131220232_tools.cs" />
+    <Compile Include="Migrations\201607131220232_tools.Designer.cs">
+      <DependentUpon>201607131220232_tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131335513_ajout status tool.cs" />
+    <Compile Include="Migrations\201607131335513_ajout status tool.Designer.cs">
+      <DependentUpon>201607131335513_ajout status tool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131341206_modif status.cs" />
+    <Compile Include="Migrations\201607131341206_modif status.Designer.cs">
+      <DependentUpon>201607131341206_modif status.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ToolListViewModel.cs" />
+    <Compile Include="Models\ToolViewModel.cs" />
     <Compile Include="Models\MapList.cs" />
     <Compile Include="Models\MapsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -253,6 +269,8 @@
     <Content Include="Views\Maps\Details.cshtml" />
     <Content Include="Views\Maps\Edit.cshtml" />
     <Content Include="Views\Maps\Index.cshtml" />
+    <Content Include="Views\Tool\Index.cshtml" />
+    <Content Include="Views\Tool\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -278,6 +296,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607130735516_correction modèle.resx">
       <DependentUpon>201607130735516_correction modèle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131220232_tools.resx">
+      <DependentUpon>201607131220232_tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131335513_ajout status tool.resx">
+      <DependentUpon>201607131335513_ajout status tool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131341206_modif status.resx">
+      <DependentUpon>201607131341206_modif status.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

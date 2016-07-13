@@ -1,0 +1,43 @@
+﻿@model MapLend.Mvc.Models.ToolListViewModel
+@using MapLend.Mvc.Infrastructure
+@{
+    ViewBag.Title = "Mes objets en prêt";
+}
+
+<h2>Mes objets que je prête</h2>
+<ul>
+    @foreach (var cat in Model.Categories)
+    {
+        <li>
+            @cat.Name
+            <ul>
+                @foreach (var tool in Model.Tools.Where(t => t.CategoryId == cat.Id).OrderBy(t => t.Name))
+                {
+                    <li>
+                        @Html.ActionLink(tool.Name, "Edit", new { id = tool.Id }) - @tool.Status.GetName()
+                        @using (Html.BeginForm("ChangeStatus", "Tool", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(t => tool.Id)
+                            switch (tool.Status)
+                            {
+                                case MapLend.Business.ToolStatus.Available:
+                                    <input type="hidden" name="tool.Status" value="2" />
+                                    <input type="submit" value="Indisponible" />
+                                    break;
+                                case MapLend.Business.ToolStatus.Unavailable:
+                                    <input type="hidden" name="tool.Status" value="1" />
+                                    <input type="submit" value="Disponible" />
+                                    break;
+                                case MapLend.Business.ToolStatus.Lended:
+                                default:
+                                    // Nothing !
+                                    break;
+                            }
+                        }
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
