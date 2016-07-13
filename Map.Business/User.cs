@@ -22,7 +22,7 @@ namespace MapLend.Business
 
         public string Username { get; set; }
 
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
 
         public int Rating { get; set; }
 

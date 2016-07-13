@@ -69,9 +69,13 @@ namespace MapLend.Mvc.Controllers
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                Firstname = this.CurrentUser.Firstname,
-                Surname = this.CurrentUser.Surname,
-                HasPhoto = false
+                FirstName = this.CurrentUser.Firstname,
+                SurName = this.CurrentUser.Surname,
+                HasPhoto = this.CurrentUser.Photo != null,
+                Address1 = this.CurrentUser.Address.AddressLine1,
+                Address2 = this.CurrentUser.Address.AddressLine2,
+                ZipCode = this.CurrentUser.Address.ZipCode,
+                City = this.CurrentUser.Address.City
             };
 
             return View(model);
@@ -81,8 +85,13 @@ namespace MapLend.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(IndexViewModel indexVm, HttpPostedFileBase photo)
         {
-            CurrentUser.Firstname = indexVm.Firstname;
-            CurrentUser.Surname = indexVm.Surname;
+            CurrentUser.Firstname = indexVm.FirstName;
+            CurrentUser.Surname = indexVm.SurName;
+
+            CurrentUser.Address.AddressLine1 = indexVm.Address1;
+            CurrentUser.Address.AddressLine2 = indexVm.Address2;
+            CurrentUser.Address.ZipCode = indexVm.ZipCode;
+            CurrentUser.Address.City = indexVm.City;
 
             if (photo != null)
             {
@@ -106,7 +115,7 @@ namespace MapLend.Mvc.Controllers
 
         public FileContentResult Photo()
         {
-            byte[] img = CurrentUser.Photo == null  ? null : CurrentUser.Photo.Image;
+            byte[] img = CurrentUser.Photo == null ? new byte[0] : CurrentUser.Photo.Image;
 
             return File(img, "image/jpg");
         }

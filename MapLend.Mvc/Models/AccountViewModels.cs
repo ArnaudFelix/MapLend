@@ -79,6 +79,29 @@ namespace MapLend.Mvc.Models
         [Display(Name = "Confirmer le mot de passe ")]
         [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Prénom")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Nom")]
+        public string SurName { get; set; }
+
+        [Required]
+        [Display(Name = "Adresse (ligne 1)")]
+        public string Address1 { get; set; }
+
+        [Display(Name = "Adresse (ligne 2)")]
+        public string Address2 { get; set; }
+
+        [Required, MaxLength(10)]
+        [Display(Name = "Code postal")]
+        public string ZipCode { get; set; }
+
+        [Required]
+        [Display(Name = "Ville")]
+        public string City { get; set; }
     }
 
     public class ResetPasswordViewModel

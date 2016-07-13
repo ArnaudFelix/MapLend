@@ -26,13 +26,45 @@
                 }
                 ]
             </dd>
-            <dt>Prénom :</dt>
-            <dd>@Html.EditorFor(m => m.Firstname)</dd>
-            <dt>Nom :</dt>
-            <dd>@Html.EditorFor(m => m.Surname)</dd>
+            <dt>
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+            </dt>
+            <dd>
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            </dd>
+            <dt>
+                @Html.LabelFor(m => m.SurName, new { @class = "col-md-2 control-label" })
+            </dt>
+            <dd>
+                @Html.TextBoxFor(m => m.SurName, new { @class = "form-control" })
+            </dd>
+            <dt>
+                @Html.LabelFor(m => m.Address1, new { @class = "col-md-2 control-label" })
+            </dt>
+            <dd>
+                @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+            </dd>
+            <dt>
+                @Html.LabelFor(m => m.Address2, new { @class = "col-md-2 control-label" })
+            </dt>
+            <dd>
+                @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
+            </dd>
+            <dt>
+                @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 control-label" })
+            </dt>
+            <dd>
+                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+            </dd>
+            <dt>
+                @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+            </dt>
+            <dd>
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+            </dd>
             <dt>Photo :</dt>
             <dd>
-                <img src="../Manage/Photo" />
+                <img src="Manage/Photo" />
                 <input type="file" name="photo" />
             </dd>
         </dl>

@@ -21,10 +21,9 @@ namespace MapLend.Mvc.Infrastructure
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-
             var user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
 
-            if (CurrentUser == null)
+            if (CurrentUser == null && user != null)
             {
                 string username = User.Identity.Name;
                 CurrentUser = DbCtx.MapUsers.Single(u => u.Username == username);
