@@ -16,27 +16,63 @@ namespace MapLend.Mvc.Models
     {
         // GET: Maps
         public ActionResult Index()
-        {            
-            MapList maps = new MapList();
+        {
+            MapListViewModel maps = new MapListViewModel();
             maps.MyMaps = DbCtx.Maps.Where(m => m.Users.Any(u => u.Id == CurrentUser.Id));
-            maps.ReachMaps = DbCtx.Maps.Where(m => m.Address.ZipCode == CurrentUser.Address.ZipCode).Except(maps.MyMaps);
+            //maps.ReachMaps = DbCtx.Maps.Where(m => m.Address.ZipCode == CurrentUser.Address.ZipCode).Except(maps.MyMaps);
             return View(maps);
         }
 
+        // action permettant de s'ajouter à une map existante  (par proximité ou par nom)
+        public ActionResult Inscrire()
+        {
+            MapListViewModel maps = new MapListViewModel();
+            maps.MyMaps = DbCtx.Maps.Where(m => m.Users.Any(u => u.Id == CurrentUser.Id));
+            maps.ReachMaps = DbCtx.Maps.Where(m => m.Address.ZipCode == CurrentUser.Address.ZipCode).Except(maps.MyMaps);
 
-        // GET: Maps/Details/5
+            return View(maps);
+        }
+
+        [HttpPost]
+        public ActionResult Inscrire(int id)
+        {
+            CurrentUser.Maps.Add(DbCtx.Maps.Find(id));
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        // enlève l'utilisateur de la map et si celle-ci est vide, la supprime
+        public ActionResult Desincrire()
+        {
+            return null;
+        }
+
+        /// affiche :
+        ///     - le nom de la map
+        ///     - son adresse
+        ///     - les membres
+        ///     - permet d'inviter des voisins
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Map map = db.Maps.Find(id);
+            Map map = DbCtx.Maps.Find(id);
             if (map == null)
             {
                 return HttpNotFound();
             }
             return View(map);
+        }
+
+        [HttpPost]
+        public ActionResult Inviter(int id, string emails)
+        {
+            //....
+            
+            return RedirectToAction("Details", new { Id = id });
         }
 
         // GET: Maps/Create
@@ -54,78 +90,13 @@ namespace MapLend.Mvc.Models
         {
             if (ModelState.IsValid)
             {
-                db.Maps.Add(map);
-                db.SaveChanges();
+                DbCtx.Maps.Add(map);
+                DbCtx.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(map);
         }
 
-        // GET: Maps/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Map map = db.Maps.Find(id);
-            if (map == null)
-            {
-                return HttpNotFound();
-            }
-            return View(map);
-        }
-
-        // POST: Maps/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Map map)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(map).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(map);
-        }
-
-        // GET: Maps/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Map map = db.Maps.Find(id);
-            if (map == null)
-            {
-                return HttpNotFound();
-            }
-            return View(map);
-        }
-
-        // POST: Maps/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Map map = db.Maps.Find(id);
-            db.Maps.Remove(map);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

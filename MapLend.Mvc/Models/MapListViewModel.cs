@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MapLend.Mvc.Models
 {
-    public class MapList
+    public class MapListViewModel
     {
         public IEnumerable<Map> MyMaps { get; set; }
         public IEnumerable<Map> ReachMaps { get; set; }

@@ -204,7 +204,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ToolListViewModel.cs" />
     <Compile Include="Models\ToolViewModel.cs" />
-    <Compile Include="Models\MapList.cs" />
+    <Compile Include="Models\MapListViewModel.cs" />
     <Compile Include="Models\MapsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -268,9 +268,9 @@
     <Content Include="Views\Maps\Delete.cshtml" />
     <Content Include="Views\Maps\Details.cshtml" />
     <Content Include="Views\Maps\Edit.cshtml" />
-    <Content Include="Views\Maps\Index.cshtml" />
     <Content Include="Views\Tool\Index.cshtml" />
     <Content Include="Views\Tool\Edit.cshtml" />
+    <Content Include="Views\Maps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
