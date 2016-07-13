@@ -1,0 +1,21 @@
+﻿@model MapLend.Mvc.Models.ToolListViewModel
+@using MapLend.Mvc.Infrastructure
+@{
+    ViewBag.Title = "Mes objets en prêt";
+}
+
+<h2>Mes objets que je prête</h2>
+<ul>
+    @foreach (var cat in Model.Categories)
+    {
+        <li>
+            @cat.Name
+            <ul>
+                @foreach (var tool in Model.Tools.Where(t => t.CategoryId == cat.Id).OrderBy(t => t.Name))
+                {
+                    <li>@tool.Name - @tool.Status.GetName()</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

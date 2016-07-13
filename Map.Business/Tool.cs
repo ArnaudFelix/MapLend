@@ -15,6 +15,6 @@ namespace MapLend.Business
 
         public int Id { get; set; }
 
-        public ToolStatus ToolStatus { get; set; }
+        public ToolStatus Status { get; set; }
     }
 }
