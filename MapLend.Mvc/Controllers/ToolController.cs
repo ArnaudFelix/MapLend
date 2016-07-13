@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MapLend.Mvc.Infrastructure;
 using MapLend.Mvc.Models;
 using MapLend.Business;
+using System.Net;
 
 namespace MapLend.Mvc.Controllers
 {
@@ -50,9 +51,17 @@ namespace MapLend.Mvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            ToolViewModel tool = new ToolViewModel(DbCtx.Tools.Find(id), DbCtx.Categories.OrderBy(c => c.Name).ToList());
+            Tool toolToUpdate = DbCtx.Tools.Find(id);
 
-            return View(tool);
+            if (toolToUpdate.Status == ToolStatus.Lended)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Outil non editable car prêté !");
+            }
+            else
+            {
+                ToolViewModel tool = new ToolViewModel(toolToUpdate, DbCtx.Categories.OrderBy(c => c.Name).ToList());
+                return View(tool);
+            }
         }
 
         [HttpPost]
