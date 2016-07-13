@@ -15,9 +15,9 @@ namespace MapLend.Business
 
         public Tool Tool { get; set; }
 
-        public DateTime BeginDate { get; set; }
+        public DateTime? BeginDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public LendStatus LendStatus { get; set; }
     }

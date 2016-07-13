@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MapLend.Business
 {
-    public class ToolStatus
+    public enum ToolStatus
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        Available = 1,
+        Unavailable
     }
 }

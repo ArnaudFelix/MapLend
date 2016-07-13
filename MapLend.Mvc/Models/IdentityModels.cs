@@ -34,8 +34,6 @@ namespace MapLend.Mvc.Models
         public DbSet<User> MapUsers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Lend> Lends { get; set; }
-        public DbSet<LendStatus> LendStatuses { get; set; }
-        public DbSet<ToolStatus> ToolStatuses { get; set; }
 
         public static ApplicationDbContext Create()
         {

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MapLend.Business
 {
-    public class LendStatus
+    public enum LendStatus
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        OnDemand = 1,
+        Accepted,
+        CLosed
     }
 }
