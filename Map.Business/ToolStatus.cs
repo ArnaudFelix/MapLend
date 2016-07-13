@@ -13,6 +13,9 @@ namespace MapLend.Business
         Available = 1,
 
         [Display(Name = "Indisponible")]
-        Unavailable
+        Unavailable,
+
+        [Display(Name = "En prêt")]
+        Lended
     }
 }

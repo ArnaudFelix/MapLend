@@ -43,5 +43,7 @@ namespace MapLend.Mvc.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MapLend.Mvc.Models.ToolViewModel> ToolViewModels { get; set; }
     }
 }

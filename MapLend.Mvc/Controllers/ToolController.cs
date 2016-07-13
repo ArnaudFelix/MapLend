@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MapLend.Mvc.Infrastructure;
 using MapLend.Mvc.Models;
+using MapLend.Business;
 
 namespace MapLend.Mvc.Controllers
 {
@@ -19,7 +20,11 @@ namespace MapLend.Mvc.Controllers
 
             tools.Categories = DbCtx.Categories.OrderBy(c => c.Name);
             var toolList = new List<ToolViewModel>();
-            DbCtx.Tools.Include(t => t.Category).Where(t => t.User.Id == CurrentUser.Id).ToList().ForEach(t => toolList.Add(new ToolViewModel(t)));
+            DbCtx.Tools
+                .Include(t => t.Category)
+                .Where(t => t.User.Id == CurrentUser.Id)
+                .ToList()
+                .ForEach(t => toolList.Add(new ToolViewModel(t)));
 
             tools.Tools = toolList;
 
@@ -28,24 +33,43 @@ namespace MapLend.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeStatus(ToolViewModel tool)
+        public ActionResult ChangeStatus(ToolViewModel tool, FormCollection fc)
         {
-            return View();
+            Tool updatingTool = DbCtx.Tools.Find(tool.Id);
+            updatingTool.Status = tool.Status;
+
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            ToolViewModel tool = new ToolViewModel(DbCtx.Tools.Find(id), DbCtx.Categories.OrderBy(c => c.Name).ToList());
+
+            return View(tool);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ToolViewModel tool)
         {
-            return View();
+            Tool updatingTool = DbCtx.Tools.Find(tool.Id);
+
+            updatingTool.Name = tool.Name;
+            updatingTool.CategoryId = tool.CategoryId;
+
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        [HttpDelete]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int? id)
         {
@@ -57,7 +81,7 @@ namespace MapLend.Mvc.Controllers
             return View();
         }
 
-        [HttpPut]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(ToolViewModel tool)
         {
