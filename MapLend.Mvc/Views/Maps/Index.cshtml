@@ -1,13 +1,33 @@
-﻿@model MapLend.Mvc.Models.MapListViewModel
+﻿@model IEnumerable<MapLend.Business.Map>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-<ul>
-    @foreach (var map in Model.MyMaps)
-    {
-        <li>@Html.ActionLink(map.Name, "Details", new { id = map.Id })</li>
-        <li><a href="Maps/Details/@map.Id">@map.Name</a></li>
-    }
-</ul>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

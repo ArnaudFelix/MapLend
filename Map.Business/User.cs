@@ -10,7 +10,7 @@ namespace MapLend.Business
     {
         public ICollection<Tool> Tools { get; set; }
 
-        public ICollection<Map> Maps { get; set; }
+        public virtual ICollection<Map> Maps { get; set; }
 
         public int Id { get; set; }
 
