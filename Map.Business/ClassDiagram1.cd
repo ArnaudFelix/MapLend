@@ -11,22 +11,22 @@
       <Property Name="Photo" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
+      <Property Name="Tools" />
       <Property Name="Maps" />
       <Property Name="BorrowedTools" />
       <Property Name="LendedTools" />
-      <Property Name="Tools" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="MapLend.Business.Tool">
     <Position X="3.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAADAAAAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAAAACAA=</HashCode>
+      <HashCode>AAADAAAEAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Tool.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Category" />
       <Property Name="User" />
-      <Property Name="ToolStatus" />
+      <Property Name="Status" />
     </ShowAsAssociation>
   </Class>
   <Class Name="MapLend.Business.Category">
@@ -69,26 +69,26 @@
       <Property Name="LendStatus" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="MapLend.Business.LendStatus">
-    <Position X="0.5" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>LendStatus.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MapLend.Business.ToolStatus">
-    <Position X="0.5" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ToolStatus.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MapLend.Business.UserPhoto">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>UserPhoto.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Enum Name="MapLend.Business.LendStatus" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>LendStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MapLend.Business.ToolStatus" Collapsed="true">
+    <Position X="1.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ToolStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

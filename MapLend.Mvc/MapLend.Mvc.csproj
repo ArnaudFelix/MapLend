@@ -170,6 +170,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LendController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
@@ -203,9 +204,14 @@
     <Compile Include="Migrations\201607180812054_remove view models.Designer.cs">
       <DependentUpon>201607180812054_remove view models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607181000181_correction lend.cs" />
+    <Compile Include="Migrations\201607181000181_correction lend.Designer.cs">
+      <DependentUpon>201607181000181_correction lend.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LendViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ToolListViewModel.cs" />
     <Compile Include="Models\ToolViewModel.cs" />
@@ -275,6 +281,9 @@
     <Content Include="Views\Maps\Details.cshtml" />
     <Content Include="Views\Maps\Edit.cshtml" />
     <Content Include="Views\Maps\Index.cshtml" />
+    <Content Include="Views\Tool\Add.cshtml" />
+    <Content Include="Views\Lend\Index.cshtml" />
+    <Content Include="Views\Tool\NeighborhoodTools.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607180812054_remove view models.resx">
       <DependentUpon>201607180812054_remove view models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607181000181_correction lend.resx">
+      <DependentUpon>201607181000181_correction lend.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

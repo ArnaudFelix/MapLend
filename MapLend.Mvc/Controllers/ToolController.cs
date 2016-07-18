@@ -19,7 +19,11 @@ namespace MapLend.Mvc.Controllers
         {
             ToolListViewModel tools = new ToolListViewModel();
 
-            tools.Categories = DbCtx.Categories.OrderBy(c => c.Name);
+            // Catégories non vides :
+            IQueryable<int> catIds = DbCtx.Tools.Where(t => t.User.Id == CurrentUser.Id).Select(t => t.CategoryId);
+
+            tools.Categories = DbCtx.Categories.Where(c => catIds.Any(cid => cid == c.Id)).OrderBy(c => c.Name);
+
             var toolList = new List<ToolViewModel>();
             DbCtx.Tools
                 .Include(t => t.Category)
@@ -52,7 +56,7 @@ namespace MapLend.Mvc.Controllers
             }
 
             // Filtre sur le user id pour éviter l'édition des outils du voisin :
-            Tool toolToUpdate = DbCtx.Tools.Single(t => t.Id == id && t.User.Id == CurrentUser.Id);
+            Tool toolToUpdate = DbCtx.Tools.Include(t => t.Category).Single(t => t.Id == id && t.User.Id == CurrentUser.Id);
 
             if (toolToUpdate.Status == ToolStatus.Lended)
             {
@@ -124,6 +128,33 @@ namespace MapLend.Mvc.Controllers
             DbCtx.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        // Liste des objets disponibles chez mes voisins :
+        public ActionResult NeighborhoodTools()
+        {
+            ToolListViewModel tools = new ToolListViewModel();
+
+            // Catégories non vides :
+            var myTools = DbCtx.Maps
+                .Include(m => m.Users)
+                .Where(m => m.Users.Any(u => u.Id == CurrentUser.Id))
+                .SelectMany(m => m.Users)
+                .Where(u => u.Id != CurrentUser.Id)
+                .SelectMany(u => u.Tools)
+                .Include(t => t.Category)
+                .Include(t => t.User);
+
+            IQueryable<int> catIds = myTools.Select(t => t.CategoryId);
+
+            tools.Categories = DbCtx.Categories.Where(c => catIds.Any(cid => cid == c.Id)).OrderBy(c => c.Name);
+
+            var toolList = new List<ToolViewModel>();
+            myTools.ToList().ForEach(t => toolList.Add(new ToolViewModel(t, null, t.User)));
+
+            tools.Tools = toolList;
+
+            return View(tools);
         }
     }
 }
