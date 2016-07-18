@@ -34,6 +34,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
+
             private set
             {
                 _signInManager = value;
@@ -46,6 +47,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+
             private set
             {
                 _userManager = value;
@@ -54,7 +56,7 @@ namespace MapLend.Mvc.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a été changé."
@@ -102,7 +104,8 @@ namespace MapLend.Mvc.Controllers
                     if (CurrentUser.Photo == null)
                     {
                         CurrentUser.Photo = new Business.UserPhoto { Image = array };
-                    } else
+                    }
+                    else
                     {
                         CurrentUser.Photo.Image = array;
                     }
@@ -163,6 +166,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return View(model);
             }
+
             // Générer le jeton et l'envoyer
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
             if (UserManager.SmsService != null)
@@ -174,6 +178,7 @@ namespace MapLend.Mvc.Controllers
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
+
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
@@ -204,6 +209,7 @@ namespace MapLend.Mvc.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
+
             return RedirectToAction("Index", "Manage");
         }
 
@@ -226,6 +232,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return View(model);
             }
+
             var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
             if (result.Succeeded)
             {
@@ -234,8 +241,10 @@ namespace MapLend.Mvc.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
+
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
+
             //Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             ModelState.AddModelError("", "La vérification du téléphone a échoué");
             return View(model);
@@ -252,11 +261,13 @@ namespace MapLend.Mvc.Controllers
             {
                 return RedirectToAction("Index", new { Message = ManageMessageId.Error });
             }
+
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
+
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
@@ -285,8 +296,10 @@ namespace MapLend.Mvc.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
+
                 return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
+
             AddErrors(result);
             return View(model);
         }
@@ -314,8 +327,10 @@ namespace MapLend.Mvc.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
+
                     return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
                 }
+
                 AddErrors(result);
             }
 
@@ -336,6 +351,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return View("Error");
             }
+
             var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
             var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
@@ -365,6 +381,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
             }
+
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
@@ -407,6 +424,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return user.PasswordHash != null;
             }
+
             return false;
         }
 
@@ -417,6 +435,7 @@ namespace MapLend.Mvc.Controllers
             {
                 return user.PhoneNumber != null;
             }
+
             return false;
         }
 

@@ -13,8 +13,19 @@
             <ul>
                 @foreach (var tool in Model.Tools.Where(t => t.CategoryId == cat.Id).OrderBy(t => t.Name))
                 {
-                    <li>
-                        @Html.ActionLink(tool.Name, "Edit", new { id = tool.Id }) - @tool.Status.GetName()
+                    <li class="list-inline">
+                        @if (tool.Status != MapLend.Business.ToolStatus.Lended)
+                        {
+                            @Html.ActionLink(tool.Name, "Edit", new { id = tool.Id })
+                        }
+                        else
+                        {
+                            @Html.Raw(tool.Name)
+                        }
+
+                        @Html.Raw(" - ")
+                        @tool.Status.GetName()
+
                         @using (Html.BeginForm("ChangeStatus", "Tool", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()

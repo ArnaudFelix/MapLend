@@ -72,6 +72,7 @@ namespace MapLend.Mvc.Controllers
 
             updatingTool.Name = tool.Name;
             updatingTool.CategoryId = tool.CategoryId;
+            updatingTool.Status = tool.Status;
 
             DbCtx.SaveChanges();
 

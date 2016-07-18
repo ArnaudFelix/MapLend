@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201607131341206_modif status.Designer.cs">
       <DependentUpon>201607131341206_modif status.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607180812054_remove view models.cs" />
+    <Compile Include="Migrations\201607180812054_remove view models.Designer.cs">
+      <DependentUpon>201607180812054_remove view models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -305,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607131341206_modif status.resx">
       <DependentUpon>201607131341206_modif status.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607180812054_remove view models.resx">
+      <DependentUpon>201607180812054_remove view models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
