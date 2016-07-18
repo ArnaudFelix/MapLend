@@ -19,6 +19,6 @@ namespace MapLend.Business
 
         public DateTime? EndDate { get; set; }
 
-        public LendStatus LendStatus { get; set; }
+        public LendStatus Status { get; set; }
     }
 }

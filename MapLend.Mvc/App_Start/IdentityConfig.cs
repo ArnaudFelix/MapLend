@@ -54,10 +54,10 @@ namespace MapLend.Mvc
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = true               
             };
 
             // Configurer les valeurs par défaut du verrouillage de l'utilisateur

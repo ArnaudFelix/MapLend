@@ -19,7 +19,11 @@ namespace MapLend.Mvc.Controllers
         {
             ToolListViewModel tools = new ToolListViewModel();
 
-            tools.Categories = DbCtx.Categories.OrderBy(c => c.Name);
+            // Catégories non vides :
+            IQueryable<int> catIds = DbCtx.Tools.Where(t => t.User.Id == CurrentUser.Id).Select(t => t.CategoryId);
+
+            tools.Categories = DbCtx.Categories.Where(c => catIds.Any(cid => cid == c.Id)).OrderBy(c => c.Name);
+
             var toolList = new List<ToolViewModel>();
             DbCtx.Tools
                 .Include(t => t.Category)
