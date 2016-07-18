@@ -129,5 +129,32 @@ namespace MapLend.Mvc.Controllers
 
             return RedirectToAction("Index");
         }
+
+        // Liste des objets disponibles chez mes voisins :
+        public ActionResult NeighborhoodTools()
+        {
+            ToolListViewModel tools = new ToolListViewModel();
+
+            // Catégories non vides :
+            var myTools = DbCtx.Maps
+                .Include(m => m.Users)
+                .Where(m => m.Users.Any(u => u.Id == CurrentUser.Id))
+                .SelectMany(m => m.Users)
+                .Where(u => u.Id != CurrentUser.Id)
+                .SelectMany(u => u.Tools)
+                .Include(t => t.Category)
+                .Include(t => t.User);
+
+            IQueryable<int> catIds = myTools.Select(t => t.CategoryId);
+
+            tools.Categories = DbCtx.Categories.Where(c => catIds.Any(cid => cid == c.Id)).OrderBy(c => c.Name);
+
+            var toolList = new List<ToolViewModel>();
+            myTools.ToList().ForEach(t => toolList.Add(new ToolViewModel(t, null, t.User)));
+
+            tools.Tools = toolList;
+
+            return View(tools);
+        }
     }
 }

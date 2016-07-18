@@ -1,0 +1,24 @@
+﻿@model MapLend.Mvc.Models.ToolListViewModel
+@using MapLend.Mvc.Infrastructure
+@{
+    ViewBag.Title = "NeighborhoodTools";
+}
+
+<h2>Les objets de mes voisins</h2>
+
+<ul>
+    @foreach (var cat in Model.Categories)
+    {
+        <li>
+            @cat.Name
+            <ul>
+                @foreach (var tool in Model.Tools.Where(t => t.CategoryId == cat.Id).OrderBy(t => t.Name))
+                {
+                    <li style="display:flex">
+                        @tool.Name - @tool.Status.GetName() (Propriétaire : @tool.UserName)
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

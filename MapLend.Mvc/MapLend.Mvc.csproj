@@ -283,6 +283,7 @@
     <Content Include="Views\Maps\Index.cshtml" />
     <Content Include="Views\Tool\Add.cshtml" />
     <Content Include="Views\Lend\Index.cshtml" />
+    <Content Include="Views\Tool\NeighborhoodTools.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

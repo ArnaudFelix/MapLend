@@ -11,9 +11,11 @@ namespace MapLend.Mvc.Models
     {
         public ToolViewModel() { }
 
-        public ToolViewModel(Tool tool) : this(tool, null) { }
+        public ToolViewModel(Tool tool) : this(tool, null, null) { }
 
-        public ToolViewModel(Tool tool, IEnumerable<Category> categories)
+        public ToolViewModel(Tool tool, IEnumerable<Category> categories) : this(tool, categories, null) { }
+
+        public ToolViewModel(Tool tool, IEnumerable<Category> categories, User owner)
         {
             if (tool != null)
             {
@@ -26,6 +28,11 @@ namespace MapLend.Mvc.Models
                 }
             }
 
+            if (owner != null) {
+                UserId = owner.Id;
+                UserName = owner.Firstname + " " + owner.Surname;
+            }
+
             Categories = categories;
         }
 
@@ -34,6 +41,9 @@ namespace MapLend.Mvc.Models
         public ToolStatus Status { get; set; }
 
         public int CategoryId { get; set; }
+
+        public int UserId { get; set; }
+        public string UserName { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
     }
