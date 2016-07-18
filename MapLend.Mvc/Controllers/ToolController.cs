@@ -51,7 +51,8 @@ namespace MapLend.Mvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            Tool toolToUpdate = DbCtx.Tools.Find(id);
+            // Filtre sur le user id pour éviter l'édition des outils du voisin :
+            Tool toolToUpdate = DbCtx.Tools.Single(t => t.Id == id && t.User.Id == CurrentUser.Id);
 
             if (toolToUpdate.Status == ToolStatus.Lended)
             {
@@ -83,19 +84,46 @@ namespace MapLend.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Tool toolToDelete = DbCtx.Tools.Single(t => t.Id == id);
+
+            DbCtx.Tools.Remove(toolToDelete);
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Add()
         {
-            return View();
+            Tool newTool = new Tool();
+            newTool.Status = ToolStatus.Available;
+            newTool.User = CurrentUser;
+
+            ToolViewModel tool = new ToolViewModel(newTool, DbCtx.Categories.OrderBy(c => c.Name).ToList());
+            return View(tool);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(ToolViewModel tool)
         {
-            return View();
+            Tool addingTool = new Tool();
+
+            addingTool.Name = tool.Name;
+            addingTool.CategoryId = tool.CategoryId;
+            addingTool.Status = tool.Status;
+
+            addingTool.User = CurrentUser;
+
+            DbCtx.Tools.Add(addingTool);
+
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

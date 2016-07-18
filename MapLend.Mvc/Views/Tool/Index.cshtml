@@ -13,7 +13,7 @@
             <ul>
                 @foreach (var tool in Model.Tools.Where(t => t.CategoryId == cat.Id).OrderBy(t => t.Name))
                 {
-                    <li class="list-inline">
+                    <li style="display:flex">
                         @if (tool.Status != MapLend.Business.ToolStatus.Lended)
                         {
                             @Html.ActionLink(tool.Name, "Edit", new { id = tool.Id })
@@ -46,9 +46,20 @@
                                     break;
                             }
                         }
+
+                        @if (tool.Status != MapLend.Business.ToolStatus.Lended)
+                        {
+                            using (Html.BeginForm("Delete", "Tool", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(t => tool.Id)
+                                <input type="submit" value="Supprimer" />
+                            }
+                        }
                     </li>
                 }
             </ul>
         </li>
     }
 </ul>
+@Html.ActionLink("Ajouter un objet", "Add")

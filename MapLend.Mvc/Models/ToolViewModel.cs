@@ -15,10 +15,13 @@ namespace MapLend.Mvc.Models
 
         public ToolViewModel(Tool tool, IEnumerable<Category> categories)
         {
-            Id = tool.Id;
-            Name = tool.Name;
-            Status = tool.Status;
-            CategoryId = tool.Category.Id;
+            if (tool != null)
+            {
+                Id = tool.Id;
+                Name = tool.Name;
+                Status = tool.Status;
+                CategoryId = tool.Category.Id;
+            }
 
             Categories = categories;
         }
