@@ -20,7 +20,10 @@ namespace MapLend.Mvc.Models
                 Id = tool.Id;
                 Name = tool.Name;
                 Status = tool.Status;
-                CategoryId = tool.Category.Id;
+                if (tool.Category != null)
+                {
+                    CategoryId = tool.Category.Id;
+                }
             }
 
             Categories = categories;
