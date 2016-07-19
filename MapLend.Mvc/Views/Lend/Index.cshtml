@@ -4,11 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Mes prêts : </h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h4>Prêts en cours</h4>
 <table class="table">
     <tr>
         <th>
@@ -26,38 +24,109 @@
         <th>
             @Html.DisplayNameFor(model => model.EndDate)
         </th>
+        <th></th>
+    </tr>
+
+    @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.Accepted).OrderBy(l => l.BeginDate))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => lend.Tool.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.LenderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.BorrowerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.BeginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.EndDate)
+            </td>
+            <td>
+                @if (lend.LenderId == ViewBag.CurrentUser.Id)
+                {
+                    using (Html.BeginForm("Close", "Lend", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@lend.Id" />
+                        <label for="notation">Note : </label>
+                        <input name="notation" id="notation" type="text" />
+                        <input type="submit" value="Clôturer" />
+                    }
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<h4>Demandes en attente</h4>
+<table class="table">
+    <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Tool.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LenderName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BorrowerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeginDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tool.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LenderName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BorrowerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BeginDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @item.Status.GetName()
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.OnDemand).OrderBy(l => l.Id))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => lend.Tool.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.LenderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.BorrowerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.BeginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => lend.EndDate)
+            </td>
+            <td>
+                @if (lend.BorrowerId == ViewBag.CurrentUser.Id)
+                {
+                    using (Html.BeginForm("Cancel", "Lend", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@lend.Id" />
+                        <input type="submit" value="Annuler" />
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("Accept", "Lend", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@lend.Id" />
+                        <input type="submit" value="Accepter" />
+                    }
+                    using (Html.BeginForm("Refuse", "Lend", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@lend.Id" />
+                        <input type="submit" value="Refuser" />
+                    }
+                }
+            </td>
+        </tr>
+    }
 </table>

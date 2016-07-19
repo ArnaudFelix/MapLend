@@ -275,15 +275,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Tool\Index.cshtml" />
     <Content Include="Views\Tool\Edit.cshtml" />
-    <Content Include="Views\Tool\Add.cshtml" />
     <Content Include="Views\Maps\Create.cshtml" />
     <Content Include="Views\Maps\Delete.cshtml" />
     <Content Include="Views\Maps\Details.cshtml" />
     <Content Include="Views\Maps\Edit.cshtml" />
     <Content Include="Views\Maps\Index.cshtml" />
-    <Content Include="Views\Tool\Add.cshtml" />
     <Content Include="Views\Lend\Index.cshtml" />
     <Content Include="Views\Tool\NeighborhoodTools.cshtml" />
+    <Content Include="Views\Tool\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

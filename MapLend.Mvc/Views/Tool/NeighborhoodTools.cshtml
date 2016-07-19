@@ -16,6 +16,12 @@
                 {
                     <li style="display:flex">
                         @tool.Name - @tool.Status.GetName() (Propriétaire : @tool.UserName)
+                        @using (Html.BeginForm("Ask", "Lend", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@tool.Id"/>
+                            <input type="submit" value="Demander" />
+                        }
                     </li>
                 }
             </ul>

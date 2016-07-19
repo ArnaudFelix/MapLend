@@ -24,6 +24,7 @@ namespace MapLend.Business
 
         public virtual Address Address { get; set; }
 
+        // TODO : modifier pou calculer une moyenne de notation
         public int Rating { get; set; }
 
         public ICollection<Lend> LendedTools { get; set; }
