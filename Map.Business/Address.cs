@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MapLend.Business
 {
-    public class Address
+    public class Address : ICloneable
     {
         public int Id { get; set; }
 
@@ -20,5 +20,10 @@ namespace MapLend.Business
         public string AddressLine2 { get; set; }
 
         public string Country { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

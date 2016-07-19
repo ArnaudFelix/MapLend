@@ -13,131 +13,85 @@ using MapLend.Mvc.Infrastructure;
 namespace MapLend.Mvc.Controllers
 {
     [Authorize]
-    public class MapsController : MapControllerBase//Controller
+    public class MapsController : MapControllerBase
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Maps
         public ActionResult Index()
         {
-            //////Map maps = db.Maps.Find(id);
-            //////var movies = from m in _context.Movie select m;
-            ////// movies = movies.Where(s => s.Title.Contains(searchString));
-            ////var maps = CurrentUser.Maps;
-            //////var maps = from m in DbCtx.UserMaps select m;
-            //////maps = maps.Where(s => s.Map_Id.Contains(id));
-
-            ////var maps2 = DbCtx.Maps.Where(m => m.Users.Any(u => u.Id == CurrentUser.Id));
-
-
-            ////var maps3 = DbCtx.MapUsers.Where(u => u.Id == CurrentUser.Id).SelectMany(u => u.Maps);
-
-            //////return View(db.Maps.ToList());
-            return View(CurrentUser.Maps);
+            return View(MapViewModel.CastIntoList(CurrentUser.Maps.ToList()));
         }
 
-        // GET: Maps/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Find(string name)
         {
-            if (id == null)
+            FindMapViewModel findMaps = new FindMapViewModel();
+
+            findMaps.ProximityMaps = MapViewModel.CastIntoList(
+                DbCtx.Maps
+                    .Where(m => m.Address.ZipCode == CurrentUser.Address.ZipCode)
+                    .Except(DbCtx.MapUsers.Where(u => u.Id == CurrentUser.Id).SelectMany(u => u.Maps))
+                    .ToList()
+                );
+            
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                findMaps.NamedMaps = MapViewModel.CastIntoList(
+                DbCtx.Maps
+                    .Where(m => m.Name.Contains(name))
+                    .Except(DbCtx.MapUsers.Where(u => u.Id == CurrentUser.Id).SelectMany(u => u.Maps))
+                    .ToList()
+                );
             }
-            Map map = db.Maps.Find(id);
-            if (map == null)
-            {
-                return HttpNotFound();
-            }
-            return View(map);
+
+            return View(findMaps);
         }
 
-        // GET: Maps/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Maps/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Map map)
+        public ActionResult Subscribe(int? id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Maps.Add(map);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Map newSubscription = DbCtx.Maps.Find(id);
 
-            return View(map);
-        }
+            CurrentUser.Maps.Add(newSubscription);
 
-        // GET: Maps/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Map map = db.Maps.Find(id);
-            if (map == null)
-            {
-                return HttpNotFound();
-            }
-            return View(map);
-        }
+            DbCtx.SaveChanges();
 
-        // POST: Maps/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Map map)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(map).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(map);
-        }
-
-        // GET: Maps/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Map map = db.Maps.Find(id);
-            if (map == null)
-            {
-                return HttpNotFound();
-            }
-            return View(map);
-        }
-
-        // POST: Maps/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Map map = db.Maps.Find(id);
-            db.Maps.Remove(map);
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Unsubscribe(int? id)
         {
-            if (disposing)
+            Map mapToUnsubscribe = DbCtx.Maps.Find(id);
+
+            CurrentUser.Maps.Remove(mapToUnsubscribe);
+
+            if (mapToUnsubscribe.Users.Count == 0)
             {
-                db.Dispose();
+                DbCtx.Maps.Remove(mapToUnsubscribe);
             }
-            base.Dispose(disposing);
+
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(string newMapName)
+        {
+            Map newMap = new Map
+            {
+                Name = newMapName,
+                Address = (Address)CurrentUser.Address.Clone(),
+                Users = new List<User> { CurrentUser }
+            };
+
+            DbCtx.Maps.Add(newMap);
+
+            DbCtx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
