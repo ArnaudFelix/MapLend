@@ -14,7 +14,7 @@ namespace MapLend.Business
 
         public int Id { get; set; }
 
-        public ICollection<Lend> BorrowedTools { get; set; }
+        public virtual ICollection<Lend> BorrowedTools { get; set; }
 
         public string Firstname { get; set; }
 
@@ -24,11 +24,34 @@ namespace MapLend.Business
 
         public virtual Address Address { get; set; }
 
-        // TODO : modifier pou calculer une moyenne de notation
         public int Rating { get; set; }
 
-        public ICollection<Lend> LendedTools { get; set; }
+        public virtual ICollection<Lend> LendedTools { get; set; }
 
         public virtual UserPhoto Photo { get; set; }
+
+        public void EvaluateRatingValue()
+        {
+            int ratingSum = 0;
+            int nbRating = 0;
+
+            foreach (var lend in BorrowedTools)
+            {
+                if (lend.Rating != null)
+                {
+                    ratingSum += lend.Rating.Value;
+                    nbRating++;
+                }
+            }
+
+            if (nbRating == 0)
+            {
+                Rating = 0;
+            }
+            else
+            {
+                Rating = ratingSum / nbRating;
+            }
+        }
     }
 }

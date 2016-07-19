@@ -50,6 +50,8 @@ namespace MapLend.Mvc.Controllers
                 Status = LendStatus.OnDemand
             };
 
+            toolToLend.Status = ToolStatus.Lended;
+
             DbCtx.Lends.Add(lend);
 
             DbCtx.SaveChanges();
@@ -67,7 +69,9 @@ namespace MapLend.Mvc.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Lend lendToCancel = DbCtx.Lends.Find(id);
+            Lend lendToCancel = DbCtx.Lends.Include(l => l.Tool).First(l => l.Id == id);
+
+            lendToCancel.Tool.Status = ToolStatus.Available;
 
             DbCtx.Lends.Remove(lendToCancel);
 
@@ -89,6 +93,7 @@ namespace MapLend.Mvc.Controllers
             Lend acceptingLend = DbCtx.Lends.Find(id);
 
             acceptingLend.Status = LendStatus.Accepted;
+            acceptingLend.BeginDate = DateTime.Now;
 
             DbCtx.SaveChanges();
 
@@ -107,6 +112,8 @@ namespace MapLend.Mvc.Controllers
 
             Lend refusingLend = DbCtx.Lends.Find(id);
 
+            refusingLend.Tool.Status = ToolStatus.Available;
+
             DbCtx.Lends.Remove(refusingLend);
 
             DbCtx.SaveChanges();
@@ -117,18 +124,22 @@ namespace MapLend.Mvc.Controllers
         // Clôture un prêt
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Close(int? id, int notation)
+        public ActionResult Close(int? id, int? notation)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Lend closingLend = DbCtx.Lends.Include(l => l.Borrower).First(l => l.Id == id);
+            Lend closingLend = DbCtx.Lends.Find(id);
 
             closingLend.Status = LendStatus.Closed;
+            closingLend.EndDate = DateTime.Now;
+            closingLend.Rating = notation;
 
-            closingLend.Borrower.Rating = notation;
+            closingLend.Tool.Status = ToolStatus.Available;
+
+            closingLend.Borrower.EvaluateRatingValue();
 
             DbCtx.SaveChanges();
 

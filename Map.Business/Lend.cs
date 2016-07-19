@@ -9,16 +9,18 @@ namespace MapLend.Business
     {
         public int Id { get; set; }
 
-        public User Lender { get; set; }
+        public virtual User Lender { get; set; }
 
-        public User Borrower { get; set; }
+        public virtual User Borrower { get; set; }
 
-        public Tool Tool { get; set; }
+        public virtual Tool Tool { get; set; }
 
         public DateTime? BeginDate { get; set; }
 
         public DateTime? EndDate { get; set; }
 
         public LendStatus Status { get; set; }
+
+        public int? Rating { get; set; }
     }
 }
