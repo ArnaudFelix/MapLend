@@ -13,12 +13,19 @@ using MapLend.Mvc.Infrastructure;
 namespace MapLend.Mvc.Controllers
 {
     [Authorize]
-    public class MapsController : MapControllerBase
+    public class MapController : MapControllerBase
     {
         // GET: Maps
         public ActionResult Index()
         {
             return View(MapViewModel.CastIntoList(CurrentUser.Maps.ToList()));
+        }
+
+        public ActionResult Details(int id)
+        {
+            Map map = DbCtx.Maps.Find(id);
+
+            return View(new MapViewModel(map, withUsers: true));
         }
 
         public ActionResult Find(string name)

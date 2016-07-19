@@ -1,0 +1,82 @@
+﻿@model MapLend.Mvc.Models.MapViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+</style>
+<h2>Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NbUsers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NbUsers)
+        </dd>
+    </dl>
+</div>
+<div id="map"></div>
+<script>
+    function initialize() {
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(-34.397, 150.644);
+        var mapOptions = {
+            zoom: 16,
+            center: latlng
+        }
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        // Centrage de la carte sur l'adresse de la map :
+        geocoder.geocode({ 'address': '@Model.Address' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                //var marker = new google.maps.Marker({
+                //    map: map,
+                //    position: results[0].geometry.location
+                //});
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+
+        // Affichage de chacun des membres du map :
+        @foreach (var user in Model.Users)
+        {
+        <text>
+        geocoder.geocode({ 'address': '@user.Address' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    label: '@user.FullName'
+                });
+            }
+            else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+        </text>
+        }
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_ayFwSct-yRG8MGzTVVnK3k37UzVZZx4&callback=initialize">
+</script>
+<p>
+    @Html.ActionLink("Revenir à la liste", "Index")
+</p>

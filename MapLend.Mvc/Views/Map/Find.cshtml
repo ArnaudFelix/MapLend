@@ -5,7 +5,7 @@
 
 <h2>Rejoindre un map :</h2>
 <h4>Près de chez moi</h4>
-@using (Html.BeginForm("Subscribe", "Maps", FormMethod.Post))
+@using (Html.BeginForm("Subscribe", "Map", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.DropDownListFor(model => model.Id, new SelectList(Model.ProximityMaps, "Id", "Name"), new { htmlAttributes = new { @class = "form-control" } })
@@ -13,12 +13,12 @@
 }
 
 <h4>Par son nom :</h4>
-@using (Html.BeginForm("Find", "Maps", FormMethod.Get))
+@using (Html.BeginForm("Find", "Map", FormMethod.Get))
 {
     <input type="text" name="name" />
     <input type="submit" value="Chercher" />
 }
-@using (Html.BeginForm("Subscribe", "Maps", FormMethod.Post))
+@using (Html.BeginForm("Subscribe", "Map", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.DropDownListFor(model => model.Id, new SelectList(Model.NamedMaps, "Id", "Name"), new { htmlAttributes = new { @class = "form-control" } })
@@ -26,7 +26,7 @@
 }
 
 <h4>Aucune MAP ne vous convient ? Créez la vôtre : </h4>
-@using (Html.BeginForm("Create", "Maps", FormMethod.Post))
+@using (Html.BeginForm("Create", "Map", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <input type="text" name="newMapName" />

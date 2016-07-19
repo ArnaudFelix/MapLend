@@ -25,5 +25,10 @@ namespace MapLend.Business
         {
             return this.MemberwiseClone();
         }
+
+        public override string ToString()
+        {
+            return AddressLine1 + " " + AddressLine2 + ", " + ZipCode + " " + City + ", " + Country;
+        }
     }
 }
