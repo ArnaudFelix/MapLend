@@ -21,9 +21,6 @@
         <th>
             @Html.DisplayNameFor(model => model.BeginDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
         <th></th>
     </tr>
 
@@ -41,9 +38,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => lend.BeginDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.EndDate)
             </td>
             <td>
                 @if (lend.LenderId == ViewBag.CurrentUser.Id)
@@ -74,12 +68,6 @@
         <th>
             @Html.DisplayNameFor(model => model.BorrowerName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BeginDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
         <th></th>
     </tr>
 
@@ -94,12 +82,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => lend.BorrowerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.BeginDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.EndDate)
             </td>
             <td>
                 @if (lend.BorrowerId == ViewBag.CurrentUser.Id)
