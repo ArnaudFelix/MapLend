@@ -24,6 +24,7 @@ namespace MapLend.Mvc.Models
             EndDate = lend.EndDate;
             Tool = new ToolViewModel(lend.Tool);
             Status = lend.Status;
+            Rating = lend.Rating;
         }
 
         public int Id { get; set; }
@@ -48,5 +49,9 @@ namespace MapLend.Mvc.Models
 
         [Display(Name = "Statut")]
         public LendStatus Status { get; set; }
+
+        [Display(Name = "Note")]
+        public int? Rating { get; set; }
+
     }
 }

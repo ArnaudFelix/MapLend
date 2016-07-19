@@ -7,13 +7,13 @@ namespace MapLend.Mvc.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class correctionlend : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(correctionlend));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607181000181_correction lend"; }
+            get { return "201607190946057_initial"; }
         }
         
         string IMigrationMetadata.Source

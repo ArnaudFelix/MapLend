@@ -180,37 +180,9 @@
     </Compile>
     <Compile Include="Infrastructure\EnumGetName.cs" />
     <Compile Include="Controllers\MapControllerBase.cs" />
-    <Compile Include="Migrations\201607121355464_initial.cs" />
-    <Compile Include="Migrations\201607121355464_initial.Designer.cs">
-      <DependentUpon>201607121355464_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607130735516_correction modèle.cs" />
-    <Compile Include="Migrations\201607130735516_correction modèle.Designer.cs">
-      <DependentUpon>201607130735516_correction modèle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607131220232_tools.cs" />
-    <Compile Include="Migrations\201607131220232_tools.Designer.cs">
-      <DependentUpon>201607131220232_tools.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607131335513_ajout status tool.cs" />
-    <Compile Include="Migrations\201607131335513_ajout status tool.Designer.cs">
-      <DependentUpon>201607131335513_ajout status tool.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607131341206_modif status.cs" />
-    <Compile Include="Migrations\201607131341206_modif status.Designer.cs">
-      <DependentUpon>201607131341206_modif status.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607180812054_remove view models.cs" />
-    <Compile Include="Migrations\201607180812054_remove view models.Designer.cs">
-      <DependentUpon>201607180812054_remove view models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607181000181_correction lend.cs" />
-    <Compile Include="Migrations\201607181000181_correction lend.Designer.cs">
-      <DependentUpon>201607181000181_correction lend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607190834185_lend rating.cs" />
-    <Compile Include="Migrations\201607190834185_lend rating.Designer.cs">
-      <DependentUpon>201607190834185_lend rating.cs</DependentUpon>
+    <Compile Include="Migrations\201607190946057_initial.cs" />
+    <Compile Include="Migrations\201607190946057_initial.Designer.cs">
+      <DependentUpon>201607190946057_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -307,29 +279,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607121355464_initial.resx">
-      <DependentUpon>201607121355464_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607130735516_correction modèle.resx">
-      <DependentUpon>201607130735516_correction modèle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607131220232_tools.resx">
-      <DependentUpon>201607131220232_tools.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607131335513_ajout status tool.resx">
-      <DependentUpon>201607131335513_ajout status tool.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607131341206_modif status.resx">
-      <DependentUpon>201607131341206_modif status.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607180812054_remove view models.resx">
-      <DependentUpon>201607180812054_remove view models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607181000181_correction lend.resx">
-      <DependentUpon>201607181000181_correction lend.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607190834185_lend rating.resx">
-      <DependentUpon>201607190834185_lend rating.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607190946057_initial.resx">
+      <DependentUpon>201607190946057_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

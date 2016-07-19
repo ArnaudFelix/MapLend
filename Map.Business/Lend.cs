@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -9,8 +10,10 @@ namespace MapLend.Business
     {
         public int Id { get; set; }
 
+        [InverseProperty("LendedTools")]
         public virtual User Lender { get; set; }
 
+        [InverseProperty("BorrowedTools")]
         public virtual User Borrower { get; set; }
 
         public virtual Tool Tool { get; set; }

@@ -139,6 +139,7 @@ namespace MapLend.Mvc.Controllers
 
             closingLend.Tool.Status = ToolStatus.Available;
 
+            //User borrower = DbCtx.MapUsers.Include(u => u.BorrowedTools).First(u => u.Id == closingLend.Borrower.Id);
             closingLend.Borrower.EvaluateRatingValue();
 
             DbCtx.SaveChanges();

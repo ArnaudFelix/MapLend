@@ -34,27 +34,20 @@ namespace MapLend.Mvc.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        BeginDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(nullable: false),
-                        User_Id = c.Int(),
-                        User_Id1 = c.Int(),
+                        BeginDate = c.DateTime(),
+                        EndDate = c.DateTime(),
+                        Status = c.Int(nullable: false),
+                        Rating = c.Int(),
                         Borrower_Id = c.Int(),
                         Lender_Id = c.Int(),
-                        LendStatus_Id = c.Int(),
                         Tool_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .ForeignKey("dbo.Users", t => t.User_Id1)
                 .ForeignKey("dbo.Users", t => t.Borrower_Id)
                 .ForeignKey("dbo.Users", t => t.Lender_Id)
-                .ForeignKey("dbo.LendStatus", t => t.LendStatus_Id)
                 .ForeignKey("dbo.Tools", t => t.Tool_Id)
-                .Index(t => t.User_Id)
-                .Index(t => t.User_Id1)
                 .Index(t => t.Borrower_Id)
                 .Index(t => t.Lender_Id)
-                .Index(t => t.LendStatus_Id)
                 .Index(t => t.Tool_Id);
             
             CreateTable(
@@ -100,36 +93,16 @@ namespace MapLend.Mvc.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false),
                         Name = c.String(),
-                        Category_Id = c.Int(),
-                        ToolStatus_Id = c.Int(),
+                        Status = c.Int(nullable: false),
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.Category_Id)
-                .ForeignKey("dbo.ToolStatus", t => t.ToolStatus_Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.User_Id)
-                .Index(t => t.Category_Id)
-                .Index(t => t.ToolStatus_Id)
+                .Index(t => t.CategoryId)
                 .Index(t => t.User_Id);
-            
-            CreateTable(
-                "dbo.ToolStatus",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.LendStatus",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -225,18 +198,14 @@ namespace MapLend.Mvc.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Lends", "Tool_Id", "dbo.Tools");
-            DropForeignKey("dbo.Lends", "LendStatus_Id", "dbo.LendStatus");
             DropForeignKey("dbo.Lends", "Lender_Id", "dbo.Users");
             DropForeignKey("dbo.Lends", "Borrower_Id", "dbo.Users");
             DropForeignKey("dbo.Tools", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Tools", "ToolStatus_Id", "dbo.ToolStatus");
-            DropForeignKey("dbo.Tools", "Category_Id", "dbo.Categories");
+            DropForeignKey("dbo.Tools", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.UserPhotoes", "UserId", "dbo.Users");
             DropForeignKey("dbo.MapUsers", "User_Id", "dbo.Users");
             DropForeignKey("dbo.MapUsers", "Map_Id", "dbo.Maps");
             DropForeignKey("dbo.Maps", "Address_Id", "dbo.Addresses");
-            DropForeignKey("dbo.Lends", "User_Id1", "dbo.Users");
-            DropForeignKey("dbo.Lends", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Users", "Address_Id", "dbo.Addresses");
             DropIndex("dbo.MapUsers", new[] { "User_Id" });
             DropIndex("dbo.MapUsers", new[] { "Map_Id" });
@@ -248,25 +217,19 @@ namespace MapLend.Mvc.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Tools", new[] { "User_Id" });
-            DropIndex("dbo.Tools", new[] { "ToolStatus_Id" });
-            DropIndex("dbo.Tools", new[] { "Category_Id" });
+            DropIndex("dbo.Tools", new[] { "CategoryId" });
             DropIndex("dbo.UserPhotoes", new[] { "UserId" });
             DropIndex("dbo.Maps", new[] { "Address_Id" });
             DropIndex("dbo.Users", new[] { "Address_Id" });
             DropIndex("dbo.Lends", new[] { "Tool_Id" });
-            DropIndex("dbo.Lends", new[] { "LendStatus_Id" });
             DropIndex("dbo.Lends", new[] { "Lender_Id" });
             DropIndex("dbo.Lends", new[] { "Borrower_Id" });
-            DropIndex("dbo.Lends", new[] { "User_Id1" });
-            DropIndex("dbo.Lends", new[] { "User_Id" });
             DropTable("dbo.MapUsers");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.LendStatus");
-            DropTable("dbo.ToolStatus");
             DropTable("dbo.Tools");
             DropTable("dbo.UserPhotoes");
             DropTable("dbo.Maps");
