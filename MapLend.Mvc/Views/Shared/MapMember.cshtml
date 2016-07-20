@@ -3,7 +3,7 @@
     <div class="member-label">@Model.Label</div>
     <div>
         <img src="/Manage/Photo/@Model.Id" class="photo" />
-        @Html.DisplayFor(m => m.FullName)
+        <span class="fullname">@Model.FullName</span>
         <input name="rating" type="number" class="rating" min=0 max=5 step=1 value="@Model.Rating" readonly="readonly">
     </div>
 </div>

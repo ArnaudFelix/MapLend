@@ -517,8 +517,8 @@
         animate: true,
         displayOnly: false,
         rtl: false,
-        showClear: true,
-        showCaption: true,
+        showClear: false,
+        showCaption: false,
         starCaptionClasses: {
             0.5: 'label label-danger',
             1: 'label label-danger',

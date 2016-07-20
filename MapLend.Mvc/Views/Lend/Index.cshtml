@@ -47,7 +47,7 @@
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="id" value="@lend.Id" />
                         <label for="notation">Note : </label>
-                        <input name="notation" id="notation" type="text" />
+                        <input name="notation" id="notation" type="number" class="rating" min=1 max=5 step=1>
                         <input type="submit" value="Clôturer" />
                     }
                 }
