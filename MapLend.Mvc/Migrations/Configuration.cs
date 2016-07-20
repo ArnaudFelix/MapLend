@@ -17,33 +17,24 @@ namespace MapLend.Mvc.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-
-
             // Catégories d'outils
-            Category cat1 = new Category { Name = "Petits outils" };
-            Category cat2 = new Category { Name = "Jardinage" };
-            Category cat3 = new Category { Name = "Barbecue" };
-            Category cat4 = new Category { Name = "Echelles" };
-            Category cat5 = new Category { Name = "Equipement sportif" };
-            context.Categories.AddOrUpdate(c => c.Name, cat1, cat2, cat3, cat4, cat5);
+            Category outils = new Category { Name = "Petits outils" };
+            Category jardin = new Category { Name = "Jardinage" };
+            Category barbecue = new Category { Name = "Barbecue" };
+            Category echelles = new Category { Name = "Echelles" };
+            Category sport = new Category { Name = "Equipement sportif" };
+            context.Categories.AddOrUpdate(c => c.Name, outils, jardin, barbecue, echelles, sport);
 
             // Addresses
             Address user1Address = new Address { Id = 1, AddressLine1 = "19 rue du 8 mai 1945", City = "Arcueil", Country = "France", ZipCode = "94110" };
             Address user2Address = new Address { Id = 2, AddressLine1 = "11 rue du 8 mai 1945", City = "Arcueil", Country = "France", ZipCode = "94110" };
             Address user3Address = new Address { Id = 3, AddressLine1 = "4 rue Paul Signac", City = "Arcueil", Country = "France", ZipCode = "94110" };
+            Address user4Address = new Address { Id = 1, AddressLine1 = "2 avenue des aqueducs", City = "Arcueil", Country = "France", ZipCode = "94110" };
+            Address user5Address = new Address { Id = 2, AddressLine1 = "13 rue Emile Raspail", City = "Arcueil", Country = "France", ZipCode = "94110" };
+            Address user6Address = new Address { Id = 3, AddressLine1 = "3 rue Paul Bert", City = "Arcueil", Country = "France", ZipCode = "94110" };
 
-            Address map1Address = new Address { Id = 4, AddressLine1 = "19 rue du 8 mai 1945", City = "Arcueil", Country = "France", ZipCode = "94110" };
+            Address map1Address = new Address { Id = 4, AddressLine1 = "2 avenue des aqueducs", City = "Arcueil", Country = "France", ZipCode = "94110" };
+            Address map2Address = new Address { Id = 4, AddressLine1 = "19 rue du 8 mai 1945", City = "Arcueil", Country = "France", ZipCode = "94110" };
 
             context.Addresses.AddOrUpdate(a => a.Id, user1Address, user2Address, user3Address, map1Address);
 
@@ -73,13 +64,37 @@ namespace MapLend.Mvc.Migrations
                 Username = "user3@toto.fr"
             };
 
-            context.MapUsers.AddOrUpdate(u => u.Username, mapUser1, mapUser2, mapUser3);
+            User mapUser4 = new User
+            {
+                Address = user4Address,
+                Firstname = "Jules",
+                Surname = "Bonnot",
+                Username = "jbonnot@anarchie.fr"
+            };
+
+            User mapUser5 = new User
+            {
+                Address = user5Address,
+                Firstname = "Etienne",
+                Surname = "Monier",
+                Username = "simentoff@anarchie.fr"
+            };
+
+            User mapUser6 = new User
+            {
+                Address = user6Address,
+                Firstname = "Raymond",
+                Surname = "Callemin",
+                Username = "lascience@anarchie.fr"
+            };
+
+            context.MapUsers.AddOrUpdate(u => u.Username, mapUser1, mapUser2, mapUser3, mapUser4, mapUser5, mapUser6);
 
             // outils
             Tool marteau = new Tool
             {
                 Id = 1,
-                Category = cat1,
+                Category = outils,
                 Status = ToolStatus.Available,
                 Name = "Marteau",
                 User = mapUser1
@@ -88,7 +103,7 @@ namespace MapLend.Mvc.Migrations
             Tool tournevis = new Tool
             {
                 Id = 2,
-                Category = cat1,
+                Category = outils,
                 Status = ToolStatus.Available,
                 Name = "Tournevis",
                 User = mapUser3
@@ -97,17 +112,36 @@ namespace MapLend.Mvc.Migrations
             Tool batte = new Tool
             {
                 Id = 3,
-                Category = cat5,
+                Category = sport,
                 Status = ToolStatus.Lended,
                 Name = "Batte de baseball",
                 User = mapUser3
             };
 
-            context.Tools.AddOrUpdate(t => t.Id, marteau, tournevis, batte);
+            Tool rossignol = new Tool
+            {
+                Id = 4,
+                Category = outils,
+                Status = ToolStatus.Available,
+                Name = "Rossignol",
+                User = mapUser4
+            };
+
+            Tool molotov = new Tool
+            {
+                Id = 5,
+                Category = barbecue,
+                Status = ToolStatus.Lended,
+                Name = "Cocktail Molotov",
+                User = mapUser4
+            };
+
+            context.Tools.AddOrUpdate(t => t.Id, marteau, tournevis, batte, rossignol, molotov);
 
             // Map
-            Map firstMap = new Map { Address = map1Address, Name = "Ma première Map", Users = new List<User> { mapUser1, mapUser2, mapUser3 } };
-            context.Maps.AddOrUpdate(m => m.Name, firstMap);
+            Map firstMap = new Map { Address = map1Address, Name = "La gang des neveux", Users = new List<User> { mapUser1, mapUser2, mapUser3, mapUser4 } };
+            Map secondMap = new Map { Address = map2Address, Name = "La bande à Bonnot", Users = new List<User> { mapUser4, mapUser5, mapUser6 } };
+            context.Maps.AddOrUpdate(m => m.Name, firstMap, secondMap);
 
             // Emprunt en cours
             Lend lend = new Lend
@@ -120,7 +154,17 @@ namespace MapLend.Mvc.Migrations
                 Status = LendStatus.Accepted
             };
 
-            context.Lends.AddOrUpdate(l => l.Id, lend);
+            Lend lend2 = new Lend
+            {
+                Id = 1,
+                BeginDate = new DateTime(2016, 7, 18),
+                Borrower = mapUser6,
+                Lender = mapUser4,
+                Tool = molotov,
+                Status = LendStatus.Accepted
+            };
+
+            context.Lends.AddOrUpdate(l => l.Id, lend, lend2);
 
             // User (login)
             var store = new UserStore<ApplicationUser>(context);
@@ -133,6 +177,15 @@ namespace MapLend.Mvc.Migrations
 
             var appUser3 = new ApplicationUser { UserName = "user3@toto.fr", User = mapUser3 };
             manager.Create(appUser3, "Password@123");
+
+            var appUser4 = new ApplicationUser { UserName = mapUser4.Username, User = mapUser4 };
+            manager.Create(appUser4, "Password@123");
+
+            var appUser5 = new ApplicationUser { UserName = mapUser5.Username, User = mapUser5 };
+            manager.Create(appUser5, "Password@123");
+
+            var appUser6 = new ApplicationUser { UserName = mapUser6.Username, User = mapUser6 };
+            manager.Create(appUser6, "Password@123");
         }
 
         public static byte[] StringToByteArray(string hex)
