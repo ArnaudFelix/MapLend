@@ -118,18 +118,32 @@ namespace MapLend.Mvc.Controllers
 
         public FileContentResult Photo(int? id)
         {
-            byte[] img;
+            byte[] img = StringToByteArray("89504E470D0A1A0A0000000D4948445200000001000000010802000000907753DE000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001874455874536F667477617265007061696E742E6E657420342E302E396C337E4E0000000C4944415418");
             if (id == null)
             {
-                img = CurrentUser.Photo == null ? new byte[0] : CurrentUser.Photo.Image;
+                if (CurrentUser.Photo != null)
+                {
+                    img = CurrentUser.Photo.Image;
+                }
             }
             else
             {
                 var photo = DbCtx.UserPhotoes.Find(id);
-                img = photo == null ? new byte[0] : photo.Image;
+                if (photo != null)
+                {
+                    img = photo.Image;
+                }
             }
 
             return File(img, "image/jpg");
+        }
+
+        public static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
         }
 
         //
@@ -406,7 +420,7 @@ namespace MapLend.Mvc.Controllers
             base.Dispose(disposing);
         }
 
-#region Programmes d'assistance
+        #region Programmes d'assistance
         // Utilisé pour la protection XSRF lors de l'ajout de connexions externes
         private const string XsrfKey = "XsrfId";
 
@@ -459,6 +473,6 @@ namespace MapLend.Mvc.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

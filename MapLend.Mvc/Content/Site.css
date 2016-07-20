@@ -25,4 +25,18 @@ textarea {
 
 .photo {
     border-radius: 0.8rem;
+    width: 5rem;
+    height: 5rem;
+}
+
+.member {
+    display:flex;
+}
+.member-label {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    line-height: 2rem;
+    text-align: center;
+    background: red;
 }

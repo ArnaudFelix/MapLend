@@ -1,8 +1,9 @@
 ﻿@model MapLend.Mvc.Models.MapUserViewModel
-
-<div>
-    @Html.DisplayFor(m => m.Label)
-    <img src="/Manage/Photo/@Model.Id" class="photo" />
-    @Html.DisplayFor(m => m.FullName)
-    @Html.DisplayFor(model => model.Rating)
+<div class="member">
+    <div class="member-label">@Model.Label</div>
+    <div>
+        <img src="/Manage/Photo/@Model.Id" class="photo" />
+        @Html.DisplayFor(m => m.FullName)
+        <input name="rating" type="number" class="rating" min=0 max=5 step=1 value="@Model.Rating" readonly="readonly">
+    </div>
 </div>
