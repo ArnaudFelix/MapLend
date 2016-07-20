@@ -1,0 +1,8 @@
+﻿@model MapLend.Mvc.Models.MapUserViewModel
+
+<div>
+    @Html.DisplayFor(m => m.Label)
+    <img src="/Manage/Photo/@Model.Id" class="photo" />
+    @Html.DisplayFor(m => m.FullName)
+    @Html.DisplayFor(model => model.Rating)
+</div>

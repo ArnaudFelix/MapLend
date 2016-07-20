@@ -116,9 +116,18 @@ namespace MapLend.Mvc.Controllers
             return RedirectToAction("Index");
         }
 
-        public FileContentResult Photo()
+        public FileContentResult Photo(int? id)
         {
-            byte[] img = CurrentUser.Photo == null ? new byte[0] : CurrentUser.Photo.Image;
+            byte[] img;
+            if (id == null)
+            {
+                img = CurrentUser.Photo == null ? new byte[0] : CurrentUser.Photo.Image;
+            }
+            else
+            {
+                var photo = DbCtx.UserPhotoes.Find(id);
+                img = photo == null ? new byte[0] : photo.Image;
+            }
 
             return File(img, "image/jpg");
         }

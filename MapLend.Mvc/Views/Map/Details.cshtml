@@ -31,6 +31,12 @@
     </dl>
 </div>
 <div id="map"></div>
+<div id="members">
+    @foreach (var member in Model.Users)
+    {
+        @Html.Partial("MapMember", member)
+    }
+</div>
 <script>
     function initialize() {
         var geocoder = new google.maps.Geocoder();
@@ -63,7 +69,7 @@
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location,
-                    label: '@user.FullName'
+                    label: '@user.Label'
                 });
             }
             else {

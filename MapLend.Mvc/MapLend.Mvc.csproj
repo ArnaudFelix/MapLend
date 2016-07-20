@@ -189,6 +189,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LendViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MapUserViewModel.cs" />
     <Compile Include="Models\MapViewModel.cs" />
     <Compile Include="Models\ToolListViewModel.cs" />
     <Compile Include="Models\ToolViewModel.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Tool\Add.cshtml" />
     <Content Include="Views\Map\Find.cshtml" />
     <Content Include="Views\Map\Details.cshtml" />
+    <Content Include="Views\Shared\MapMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

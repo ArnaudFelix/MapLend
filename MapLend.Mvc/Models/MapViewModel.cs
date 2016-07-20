@@ -34,12 +34,18 @@ namespace MapLend.Mvc.Models
             if (withUsers)
             {
                 Users = new List<MapUserViewModel>();
+
+                string labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                int i = 0;
                 foreach (var user in map.Users)
                 {
                     Users.Add(new MapUserViewModel
                     {
+                        Id = user.Id,
+                        Rating = user.Rating,
                         FullName = user.Firstname + " " + user.Surname,
-                        Address = user.Address.ToString()
+                        Address = user.Address.ToString(),
+                        Label = labels[i++]
                     });
                 }
             }
@@ -50,12 +56,6 @@ namespace MapLend.Mvc.Models
             List<MapViewModel> list = new List<MapViewModel>();
             mapList.ForEach(m => list.Add(new MapViewModel(m)));
             return list;
-        }
-
-        public class MapUserViewModel
-        {
-            public string FullName { get; set; }
-            public string Address { get; set; }
         }
     }
 }

@@ -38,6 +38,7 @@ namespace MapLend.Mvc.Models
         public DbSet<User> MapUsers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Lend> Lends { get; set; }
+        public DbSet<UserPhoto> UserPhotoes { get; set; }
 
         public static ApplicationDbContext Create()
         {
