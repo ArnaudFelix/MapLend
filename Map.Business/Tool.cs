@@ -10,9 +10,6 @@ namespace MapLend.Business
     {
         public Category Category { get; set; }
 
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
-
         public User User { get; set; }
 
         public string Name { get; set; }

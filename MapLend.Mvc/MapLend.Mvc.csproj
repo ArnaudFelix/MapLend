@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201607190946057_initial.Designer.cs">
       <DependentUpon>201607190946057_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607211329550_categoryid.cs" />
+    <Compile Include="Migrations\201607211329550_categoryid.Designer.cs">
+      <DependentUpon>201607211329550_categoryid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FindMapViewModel.cs" />
@@ -282,6 +286,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607190946057_initial.resx">
       <DependentUpon>201607190946057_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607211329550_categoryid.resx">
+      <DependentUpon>201607211329550_categoryid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

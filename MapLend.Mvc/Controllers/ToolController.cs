@@ -20,7 +20,7 @@ namespace MapLend.Mvc.Controllers
             ToolListViewModel tools = new ToolListViewModel();
 
             // Catégories non vides :
-            IQueryable<int> catIds = DbCtx.Tools.Where(t => t.User.Id == CurrentUser.Id).Select(t => t.CategoryId);
+            IQueryable<int> catIds = DbCtx.Tools.Where(t => t.User.Id == CurrentUser.Id).Select(t => t.Category.Id);
 
             tools.Categories = DbCtx.Categories.Where(c => catIds.Any(cid => cid == c.Id)).OrderBy(c => c.Name);
 
@@ -81,7 +81,7 @@ namespace MapLend.Mvc.Controllers
             Tool updatingTool = DbCtx.Tools.Find(tool.Id);
 
             updatingTool.Name = tool.Name;
-            updatingTool.CategoryId = tool.CategoryId;
+            updatingTool.Category = DbCtx.Categories.Find(tool.CategoryId);
             updatingTool.Status = tool.Status;
 
             DbCtx.SaveChanges();
@@ -123,7 +123,7 @@ namespace MapLend.Mvc.Controllers
             Tool addingTool = new Tool();
 
             addingTool.Name = tool.Name;
-            addingTool.CategoryId = tool.CategoryId;
+            addingTool.Category = DbCtx.Categories.Find(tool.CategoryId);
             addingTool.Status = tool.Status;
 
             addingTool.User = CurrentUser;
@@ -150,7 +150,7 @@ namespace MapLend.Mvc.Controllers
                 .Include(t => t.Category)
                 .Include(t => t.User);
 
-            IQueryable<int> catIds = myTools.Select(t => t.CategoryId);
+            IQueryable<int> catIds = myTools.Select(t => t.Category.Id);
 
             tools.Categories = DbCtx.Categories.Where(c => catIds.Any(cid => cid == c.Id)).OrderBy(c => c.Name);
 

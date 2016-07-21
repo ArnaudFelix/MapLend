@@ -25,7 +25,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody id="currentLends" class="collapse in">
+    <tbody id="currentLends" class="collapse">
         @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.Accepted).OrderBy(l => l.BeginDate))
         {
             var rowclass = "active";
