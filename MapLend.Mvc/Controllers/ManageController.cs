@@ -118,7 +118,7 @@ namespace MapLend.Mvc.Controllers
 
         public FileContentResult Photo(int? id)
         {
-            byte[] img = StringToByteArray("89504E470D0A1A0A0000000D4948445200000001000000010802000000907753DE000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001874455874536F667477617265007061696E742E6E657420342E302E396C337E4E0000000C4944415418");
+            byte[] img = ConvertToByteArray.StringToByteArray("89504E470D0A1A0A0000000D4948445200000001000000010802000000907753DE000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001874455874536F667477617265007061696E742E6E657420342E302E396C337E4E0000000C4944415418");
             if (id == null)
             {
                 if (CurrentUser.Photo != null)
@@ -136,14 +136,6 @@ namespace MapLend.Mvc.Controllers
             }
 
             return File(img, "image/jpg");
-        }
-
-        public static byte[] StringToByteArray(string hex)
-        {
-            return Enumerable.Range(0, hex.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                             .ToArray();
         }
 
         //

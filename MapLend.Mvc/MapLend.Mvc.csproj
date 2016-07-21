@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="Infrastructure\EnumGetName.cs" />
     <Compile Include="Infrastructure\MapControllerBase.cs" />
+    <Compile Include="Infrastructure\ConvertToByteArray.cs" />
     <Compile Include="Migrations\201607190946057_initial.cs" />
     <Compile Include="Migrations\201607190946057_initial.Designer.cs">
       <DependentUpon>201607190946057_initial.cs</DependentUpon>
