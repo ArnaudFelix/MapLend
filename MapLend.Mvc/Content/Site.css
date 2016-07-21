@@ -104,7 +104,7 @@ img.photo {
         display: flex;
         border: solid 3px darkorange;
         border-radius: 0.7rem;
-        background-color: lightsalmon;
+        background-color: orange;
         margin: 0.2rem;
     }
 

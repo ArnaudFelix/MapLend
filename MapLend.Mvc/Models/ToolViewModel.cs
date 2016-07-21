@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -28,7 +29,8 @@ namespace MapLend.Mvc.Models
                 }
             }
 
-            if (owner != null) {
+            if (owner != null)
+            {
                 UserId = owner.Id;
                 UserName = owner.Firstname + " " + owner.Surname;
             }
@@ -37,9 +39,14 @@ namespace MapLend.Mvc.Models
         }
 
         public int Id { get; set; }
+
+        [Display(Name = "Nom")]
         public string Name { get; set; }
+
+        [Display(Name = "Statut")]
         public ToolStatus Status { get; set; }
 
+        [Display(Name = "Catégorie")]
         public int CategoryId { get; set; }
 
         public int UserId { get; set; }
