@@ -42,9 +42,11 @@ namespace MapLend.Mvc.Models
         public ToolViewModel Tool { get; set; }
 
         [Display(Name = "A partir du")]
+        [DataType(DataType.Date)]
         public DateTime? BeginDate { get; set; }
 
         [Display(Name = "Jusqu'au")]
+        [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
 
         [Display(Name = "Statut")]

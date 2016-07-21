@@ -1,34 +1,52 @@
 ﻿@model MapLend.Mvc.Models.FindMapViewModel
 @{
-    ViewBag.Title = "Find";
+    ViewBag.Title = "Trouver une MAP";
 }
 
-<h2>Rejoindre un map :</h2>
-<h4>Près de chez moi</h4>
-@using (Html.BeginForm("Subscribe", "Map", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.DropDownListFor(model => model.Id, new SelectList(Model.ProximityMaps, "Id", "Name"), new { htmlAttributes = new { @class = "form-control" } })
-    <input type="submit" value="Rejoindre" />
-}
-
-<h4>Par son nom :</h4>
-@using (Html.BeginForm("Find", "Map", FormMethod.Get))
-{
-    <input type="text" name="name" />
-    <input type="submit" value="Chercher" />
-}
-@using (Html.BeginForm("Subscribe", "Map", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.DropDownListFor(model => model.Id, new SelectList(Model.NamedMaps, "Id", "Name"), new { htmlAttributes = new { @class = "form-control" } })
-    <input type="submit" value="Rejoindre" />
-}
-
-<h4>Aucune MAP ne vous convient ? Créez la vôtre : </h4>
-@using (Html.BeginForm("Create", "Map", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <input type="text" name="newMapName" />
-    <input type="submit" value="Créer !" />
-}
+<h2>Rejoindre une MAP :</h2>
+<section id="subscribeMap">
+    <section>
+        <header>
+            <h4>Près de chez moi</h4>
+        </header>
+        <content>
+            @using (Html.BeginForm("Subscribe", "Map", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.DropDownListFor(model => model.Id, new SelectList(Model.ProximityMaps, "Id", "Name"), "Choisissez une MAP", new { htmlAttributes = new { @class = "form-control" } })
+                <input type="submit" value="Rejoindre" />
+            }
+        </content>
+    </section>
+    <section>
+        <header>
+            <h4>Par son nom :</h4>
+        </header>
+        <content>
+            @using (Html.BeginForm("Find", "Map", FormMethod.Get))
+            {
+                <input type="text" name="name" />
+                <input type="submit" value="Chercher" />
+            }
+            @using (Html.BeginForm("Subscribe", "Map", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.DropDownListFor(model => model.Id, new SelectList(Model.NamedMaps, "Id", "Name"), "Choisissez une MAP", new { htmlAttributes = new { @class = "form-control" } })
+                <input type="submit" value="Rejoindre" />
+            }
+        </content>
+    </section>
+    <section>
+        <header>
+            <h4>Aucune MAP ne vous convient ? Créez la vôtre : </h4>
+        </header>
+        <content>
+            @using (Html.BeginForm("Create", "Map", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="text" name="newMapName" />
+                <input type="submit" value="Créer !" />
+            }
+        </content>
+    </section>
+</section>

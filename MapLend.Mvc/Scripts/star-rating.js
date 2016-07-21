@@ -508,12 +508,12 @@
 
     $.fn.rating.defaults = {
         theme: '',
-        language: 'en',
+        language: 'fr',
         stars: 5,
         filledStar: '<i class="glyphicon glyphicon-star"></i>',
         emptyStar: '<i class="glyphicon glyphicon-star-empty"></i>',
         containerClass: '',
-        size: 'md',
+        size: 'xs',
         animate: true,
         displayOnly: false,
         rtl: false,

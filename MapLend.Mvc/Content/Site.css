@@ -23,16 +23,81 @@ textarea {
     max-width: 280px;
 }
 
-.photo {
+    input[type=submit] {
+        border: solid 2px darkorange;
+        background-color: orange;
+        border-radius: 0.4rem;
+    }
+
+        input[type=submit]:hover {
+            background-color: darkorange;
+        }
+
+/* Affichage des tables */
+.table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+    .table thead {
+        background-color: orange;
+        cursor: pointer;
+    }
+
+        .table thead th:last-child:after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e113";
+            float: right;
+        }
+
+        .table thead.collapsed th:last-child:after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e114";
+            float: right;
+        }
+
+img.photo {
     border-radius: 0.8rem;
     width: 5rem;
     height: 5rem;
 }
 
+.navbar-inverse {
+    background-color: orange;
+    color: black !important;
+}
+
+    .navbar-inverse .navbar-brand:hover,
+    .navbar-inverse li:hover {
+        background-color: darkorange;
+    }
+
+    .navbar-inverse a {
+        color: black !important;
+    }
+
+@media (max-width: 768px) {
+    li.photo {
+        display: none;
+    }
+}
+
+#subscribeMap {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+    #subscribeMap section {
+        margin: 2rem;
+    }
+
 /* Affichage des membres de la map */
 #members {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
     #members .member {
@@ -51,6 +116,7 @@ textarea {
             text-align: center;
             background: red;
             font-weight: bold;
+            margin: 0.2rem;
         }
 
         #members .member .fullname {

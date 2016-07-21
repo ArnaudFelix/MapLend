@@ -56,7 +56,12 @@ namespace MapLend.Mvc.Controllers
             }
 
             // Filtre sur le user id pour éviter l'édition des outils du voisin :
-            Tool toolToUpdate = DbCtx.Tools.Include(t => t.Category).Single(t => t.Id == id && t.User.Id == CurrentUser.Id);
+            Tool toolToUpdate = DbCtx.Tools.Include(t => t.Category).SingleOrDefault(t => t.Id == id && t.User.Id == CurrentUser.Id);
+
+            if (toolToUpdate == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Tentative d'accès à un objet n'existant pas ou ne vous appartenant pas !");
+            }
 
             if (toolToUpdate.Status == ToolStatus.Lended)
             {

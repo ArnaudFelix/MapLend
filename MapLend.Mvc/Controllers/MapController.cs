@@ -48,6 +48,10 @@ namespace MapLend.Mvc.Controllers
                     .ToList()
                 );
             }
+            else
+            {
+                findMaps.NamedMaps = new List<MapViewModel>();
+            }
 
             return View(findMaps);
         }
@@ -72,6 +76,8 @@ namespace MapLend.Mvc.Controllers
             Map mapToUnsubscribe = DbCtx.Maps.Find(id);
 
             CurrentUser.Maps.Remove(mapToUnsubscribe);
+
+            DbCtx.SaveChanges();
 
             if (mapToUnsubscribe.Users.Count == 0)
             {

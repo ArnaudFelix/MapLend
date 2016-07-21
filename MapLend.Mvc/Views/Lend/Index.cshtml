@@ -7,156 +7,175 @@
 <h2>Mes prêts : </h2>
 
 <h4>Prêts en cours</h4>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tool.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LenderName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BorrowerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BeginDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.Accepted).OrderBy(l => l.BeginDate))
-    {
+<table class="table table-hover">
+    <thead data-target="#currentLends" data-toggle="collapse" class="collapsed">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => lend.Tool.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.LenderName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.BorrowerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.BeginDate)
-            </td>
-            <td>
-                @if (lend.LenderId == ViewBag.CurrentUser.Id)
+            <th>
+                @Html.DisplayNameFor(model => model.Tool.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LenderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeginDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="currentLends" class="collapse in">
+        @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.Accepted).OrderBy(l => l.BeginDate))
+        {
+            var rowclass = "active";
+            if (lend.LenderId == ViewBag.CurrentUser.Id)
+            {
+                rowclass = "success";
+            }
+            <tr class="@rowclass">
+                <td>
+                    @Html.DisplayFor(modelItem => lend.Tool.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.LenderName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.BorrowerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.BeginDate)
+                </td>
+                <td>
+                    @if (lend.LenderId == ViewBag.CurrentUser.Id)
                 {
                     using (Html.BeginForm("Close", "Lend", FormMethod.Post))
                     {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" value="@lend.Id" />
-                        <label for="notation">Note : </label>
-                        <input name="notation" id="notation" type="number" class="rating" min=1 max=5 step=1>
-                        <input type="submit" value="Clôturer" />
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@lend.Id" />
+                            <label for="notation">Note : </label>
+                            <input name="notation" id="notation" type="number" class="rating" min=1 max=5 step=1>
+                            <input type="submit" value="Clôturer" />
+                        }
                     }
-                }
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 <h4>Demandes en attente</h4>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tool.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LenderName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BorrowerName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.OnDemand).OrderBy(l => l.Id))
-    {
+<table class="table table-hover">
+    <thead data-target="#futurLends" data-toggle="collapse" class="collapsed">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => lend.Tool.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.LenderName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.BorrowerName)
-            </td>
-            <td>
-                @if (lend.BorrowerId == ViewBag.CurrentUser.Id)
+            <th>
+                @Html.DisplayNameFor(model => model.Tool.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LenderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowerName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="futurLends" class="collapse">
+        @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.OnDemand).OrderBy(l => l.Id))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.Tool.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.LenderName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.BorrowerName)
+                </td>
+                <td>
+                    @if (lend.BorrowerId == ViewBag.CurrentUser.Id)
                 {
                     using (Html.BeginForm("Cancel", "Lend", FormMethod.Post))
                     {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" value="@lend.Id" />
-                        <input type="submit" value="Annuler" />
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@lend.Id" />
+                            <input type="submit" value="Annuler" />
+                        }
                     }
-                }
-                else
-                {
-                    using (Html.BeginForm("Accept", "Lend", FormMethod.Post))
+                    else
                     {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" value="@lend.Id" />
-                        <input type="submit" value="Accepter" />
+                        using (Html.BeginForm("Accept", "Lend", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@lend.Id" />
+                            <input type="submit" value="Accepter" />
+                        }
+                        using (Html.BeginForm("Refuse", "Lend", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@lend.Id" />
+                            <input type="submit" value="Refuser" />
+                        }
                     }
-                    using (Html.BeginForm("Refuse", "Lend", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" value="@lend.Id" />
-                        <input type="submit" value="Refuser" />
-                    }
-                }
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 <h4>Prêts clôturés</h4>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tool.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LenderName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BorrowerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BeginDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-    </tr>
-
-    @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.Closed).OrderBy(l => l.BeginDate))
-    {
+<table class="table table-hover">
+    <thead data-target="#closedLends" data-toggle="collapse" class="collapsed">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => lend.Tool.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.LenderName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.BorrowerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.BeginDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => lend.Rating)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Tool.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LenderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeginDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody id="closedLends" class="collapse">
+        @foreach (var lend in Model.Where(l => l.Status == MapLend.Business.LendStatus.Closed).OrderBy(l => l.BeginDate))
+        {
+            var rowclass = "active";
+            if (lend.LenderId == ViewBag.CurrentUser.Id)
+            {
+                rowclass = "success";
+            }
+            <tr class="@rowclass">
+                <td>
+                    @Html.DisplayFor(modelItem => lend.Tool.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.LenderName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.BorrowerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.BeginDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => lend.EndDate)
+                </td>
+                <td>
+                    <input name="notation" id="notation" type="number" class="rating" min=1 max=5 step=1 value="@lend.Rating" readonly="readonly">
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
