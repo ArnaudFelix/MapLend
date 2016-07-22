@@ -142,7 +142,6 @@ namespace MapLend.Mvc.Controllers
 
             // Catégories non vides :
             var myTools = DbCtx.Maps
-                .Include(m => m.Users)
                 .Where(m => m.Users.Any(u => u.Id == CurrentUser.Id))
                 .SelectMany(m => m.Users)
                 .Where(u => u.Id != CurrentUser.Id)

@@ -54,7 +54,7 @@
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@lend.Id" />
                             <label for="notation">Note : </label>
-                            <input name="notation" id="notation" type="number" class="rating" min=1 max=5 step=1>
+                            <input name="notation" id="notation" type="number" class="rating" min=0 max=5 step=1>
                             <input type="submit" value="Clôturer" />
                         }
                     }
@@ -173,7 +173,7 @@
                     @Html.DisplayFor(modelItem => lend.EndDate)
                 </td>
                 <td>
-                    <input name="notation" id="notation" type="number" class="rating" min=1 max=5 step=1 value="@lend.Rating" readonly="readonly">
+                    <input name="notation" id="notation" type="number" class="rating" min=0 max=5 step=1 value="@lend.Rating" readonly="readonly">
                 </td>
             </tr>
         }
