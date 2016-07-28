@@ -1,4 +1,5 @@
-﻿using MapLend.Mvc.Models;
+﻿using MapLend.Mvc.Infrastructure;
+using MapLend.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,16 @@ namespace MapLend.Mvc.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Populate()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                PopulateDatabase.Seed(db);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
