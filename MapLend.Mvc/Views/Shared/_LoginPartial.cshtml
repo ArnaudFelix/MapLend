@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li class="photo">
-            <img src="/Manage/Photo" class="photo" />
+            <img src="@Url.Action("Photo", "Manage")" class="photo" />
         </li>
         <li>
             @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
